@@ -21,29 +21,29 @@ public class BankersAlgorithmDriver {
         threadCount = Integer.parseInt(args[1]);
 
       } catch (NumberFormatException e) {
-        System.out.println("[ERROR]: Command Line Parameters could not be converted to Integers.");
+        displayOnCommandLine("[ERROR]: Command Line Parameters could not be converted to Integers.\n");
         validInput = false;
       }
 
       String recourceCountInvalidString = String.format(
-          "[ERROR]: Invalid input for count of resources: %s, value must be between %s and %s.", recourceCount,
+          "[ERROR]: Invalid input for count of resources: %s, value must be between %s and %s.%n", recourceCount,
           lowerRange, upperRange);
       String threadCountInvalidString = String.format(
-          "[ERROR]: Invalid input for count of threads: %s, value must be between %s and %s.", threadCount, lowerRange,
+          "[ERROR]: Invalid input for count of threads: %s, value must be between %s and %s.%n", threadCount, lowerRange,
           upperRange);
 
       if (recourceCount < lowerRange || recourceCount > upperRange) {
-        System.out.println(recourceCountInvalidString);
+        displayOnCommandLine(recourceCountInvalidString);
         validInput = false;
       }
 
       if (threadCount < lowerRange || threadCount > upperRange) {
-        System.out.println(threadCountInvalidString);
+        displayOnCommandLine(threadCountInvalidString);
         validInput = false;
       }
 
       if (!validInput) {
-        System.out.println("[ERROR]: Invalid parameters provided. Exiting...");
+        displayOnCommandLine("[ERROR]: Invalid parameters provided. Exiting...\n");
         System.exit(0);
       }
 
@@ -58,15 +58,15 @@ public class BankersAlgorithmDriver {
 
       // read in the count of resources, ensuring valid input
       while (recourceCount < lowerRange || recourceCount > upperRange) {
-        System.out.print(recourceCountRequestString);
+        displayOnCommandLine(recourceCountRequestString);
         recourceCount = commandlineScanner.nextInt();
       }
 
-      System.out.println();
+      displayOnCommandLine("\n");
 
       // read in the count of threads, ensuring valid input
       while (threadCount < lowerRange || threadCount > upperRange) {
-        System.out.print(threadCountRequestString);
+        displayOnCommandLine(threadCountRequestString);
         threadCount = commandlineScanner.nextInt();
       }
 
@@ -74,17 +74,28 @@ public class BankersAlgorithmDriver {
       commandlineScanner.close();
 
     } else { // not enough command line parameters provided
-      System.out.println("[ERROR]: Insufficient number of command line parameters provided.");
+      displayOnCommandLine("[ERROR]: Insufficient number of command line parameters provided.\n");
       System.exit(0);
     }
 
-    // alert user of inputs provided.
-    String displayInputsString = String.format("%n[INFO]: Running Simulation with %s recource(s) and %s thread(s).",
-        recourceCount, threadCount);
-    System.out.println(displayInputsString);
-
     // we have valid inputs from here and can run the simulation
+    run(recourceCount, threadCount); // temp name cuz im getting hungry
 
   }// end of main
+
+  private static void displayOnCommandLine(Object o){
+
+    System.out.print(o);
+
+  }
+
+  private static void run(int recourceCount, int threadCount){
+    
+    // alert user of inputs provided.
+    String displayInputsString = String.format("%n[INFO]: Running Simulation with %s recource(s) and %s thread(s).%n",
+        recourceCount, threadCount);
+    displayOnCommandLine(displayInputsString);
+
+  }
 
 }// end of class

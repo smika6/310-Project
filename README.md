@@ -31,6 +31,7 @@ PS C:\Users\smika\Documents\GitHub\310-Project>  & 'c:\Users\smika\.vscode\exten
 [REQUEST]: Input the number of recource types (1-10): 0  
 [REQUEST]: Input the number of recource types (1-10): 11  
 [REQUEST]: Input the number of recource types (1-10): 5  
+  
 [REQUEST]: Input the number of threads (1-10): 0  
 [REQUEST]: Input the number of threads (1-10): 15  
 [REQUEST]: Input the number of threads (1-10): 5  
