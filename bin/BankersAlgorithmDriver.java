@@ -3,30 +3,34 @@ import java.util.Scanner;
 public class BankersAlgorithmDriver {
 
   public static void main(String[] args) {
-    // primitives
+
     int lowerRange = 1;
     int upperRange = 10;
 
     int recourceCount = -1;
     int threadCount = -1;
 
-    if (args.length >= 2) { // m and n are provided through the command line
+    // m and n are provided through the command line
+    if (args.length >= 2) {
+
       boolean validInput = true;
 
       try { // Attempt to convert command line inputs into integers
 
-        recourceCount = Integer.parseInt(args[1]);
-        threadCount = Integer.parseInt(args[2]);
+        recourceCount = Integer.parseInt(args[0]);
+        threadCount = Integer.parseInt(args[1]);
 
       } catch (NumberFormatException e) {
         System.out.println("[ERROR]: Command Line Parameters could not be converted to Integers.");
         validInput = false;
       }
 
-      String recourceCountInvalidString = String
-          .format("[ERROR]: Invalid input for count of resources, must be between %s and %s.", lowerRange, upperRange);
-      String threadCountInvalidString = String.format("[ERROR]: Invalid input for count of threads, must be between %s and %s.",
+      String recourceCountInvalidString = String.format(
+          "[ERROR]: Invalid input for count of resources: %s, value must be between %s and %s.", recourceCount,
           lowerRange, upperRange);
+      String threadCountInvalidString = String.format(
+          "[ERROR]: Invalid input for count of threads: %s, value must be between %s and %s.", threadCount, lowerRange,
+          upperRange);
 
       if (recourceCount < lowerRange || recourceCount > upperRange) {
         System.out.println(recourceCountInvalidString);
@@ -45,12 +49,12 @@ public class BankersAlgorithmDriver {
 
     } else if (args.length == 0) { // user did not specify m and n through the command line
 
-      // objects
-      String recourceCountRequestString = String.format("[REQUEST]: Input the number of recource types (%s-%s): ", lowerRange,
-          upperRange);
-      String threadCountRequestString = String.format("[REQUEST]: Input the number of threads (%s-%s): ", lowerRange, upperRange);
-
       Scanner commandlineScanner = new Scanner(System.in);
+
+      String recourceCountRequestString = String.format("[REQUEST]: Input the number of recource types (%s-%s): ",
+          lowerRange, upperRange);
+      String threadCountRequestString = String.format("[REQUEST]: Input the number of threads (%s-%s): ", lowerRange,
+          upperRange);
 
       // read in the count of resources, ensuring valid input
       while (recourceCount < lowerRange || recourceCount > upperRange) {
