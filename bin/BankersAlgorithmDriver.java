@@ -83,6 +83,8 @@ public class BankersAlgorithmDriver {
         recourceCount, threadCount);
     System.out.println(displayInputsString);
 
-  }
+    // we have valid inputs from here and can run the simulation
 
-}
+  }// end of main
+
+}// end of class
