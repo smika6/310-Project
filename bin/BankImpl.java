@@ -1,7 +1,7 @@
 public class BankImpl implements Bank {
 
     int numberOfThreads;
-    int numberOfRecources;
+    int numberOfResources;
 
     
     int minAvailable = 1;
@@ -11,13 +11,13 @@ public class BankImpl implements Bank {
     int[][] maximum;
 
     public BankImpl(int m, int n) {
-        this.numberOfRecources = m;
+        this.numberOfResources = m;
         this.numberOfThreads = n;
 
         //populate available array with the max available for each recource
-        available = new int[this.numberOfRecources];
+        available = new int[this.numberOfResources];
 
-        for(int i = 0; i < this.numberOfRecources; i++){
+        for(int i = 0; i < this.numberOfResources; i++){
             int allocationOfResource = (int) Math.round(Math.random() * (this.maxAvailable - minAvailable) + minAvailable);
             available[i] = allocationOfResource;
         }
@@ -27,7 +27,36 @@ public class BankImpl implements Bank {
         }
 
         // create the max recource matrix in available
-        maximum = new int[numberOfRecources][numberOfThreads];
+        maximum = new int[numberOfResources][numberOfThreads];
+
+        for (int i = 0; i < this.numberOfResources; i++)
+        {
+            for (int j = 0; j < this.numberOfThreads; j++)
+            {
+        
+                int maxs = (int) Math.round(Math.random() * (this.available[i] - minAvailable) + minAvailable);
+                maximum[i][j] = maxs; 
+
+            }
+
+        }
+
+        // Display Banker Max
+        System.out.print("\n Banker Max:");
+
+        for (int i = 0; i < maximum.length; i++)
+        {
+            System.out.print("\n");
+
+            for (int j = 0; j < maximum[i].length; j++)
+            {
+                System.out.print(" " + maximum[i][j] );
+            }
+
+        }
+        
+
+        
     }
 
     @Override
