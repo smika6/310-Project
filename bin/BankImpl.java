@@ -82,6 +82,6 @@ public class BankImpl implements Bank {
     private static void displayOnCommandLine(Object o) {
 
         System.out.print(o);
-    
-      }
+
+    }
 }
