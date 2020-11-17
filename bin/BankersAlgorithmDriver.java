@@ -98,7 +98,7 @@ public class BankersAlgorithmDriver {
 
     //we can start the project
 
-    Bank theBank = new BankImpl(countOfRecources, countOfThreads);
+    Bank theBank = new BankImpl(recourceCount, threadCount);
 
   }
 
