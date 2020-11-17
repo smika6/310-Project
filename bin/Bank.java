@@ -4,12 +4,14 @@ public class BankImpl implements Bank{
     int numberOfRecources;
 
     int[] available;
+    int[][] maximum;
 
     public Bank(int m, int n){
         this.numberOfRecources = m;
         this.numberOfThreads = n;
 
         //create the max recource matrix in available
+        maximum = new int[numberOfRecources][numberOfThreads];
     }
 
     @Override
