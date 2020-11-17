@@ -43,7 +43,7 @@ public class BankImpl implements Bank {
         }
 
         // Display Banker Max
-        System.out.println("\n[DISPLAY]: Banker Max:");
+        System.out.println("\n\n[DISPLAY]: Banker Max:");
 
         for (int i = 0; i < maximum.length; i++) {
             for (int j = 0; j < maximum[i].length; j++) {
