@@ -1,14 +1,46 @@
-public interface Bank {
+public class Bank implements BankInterface{
+
+    public Bank(int m, int n){
+
+    }
+
+    @Override
+    public void addCustomer(int customerNum, int[] maxDemand) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void getState() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean requestRecources(int customerNumber, int[] request) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean releaseRecources(int customerNumber, int[] release) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+}
+
+
+interface BankInterface {
 
     /**
      * Add a customer
      * @param customerNum - the number of the customer
-     * @param maxDemand  -
+     * @param maxDemand  - the maximum demand for this customer
      */
     public void addCustomer(int customerNum, int[] maxDemand);
 
     /**
-     * 
+     * Output the value of available
      */
     public void getState();
     
