@@ -30,6 +30,8 @@ public class BankImpl implements Bank {
             System.out.print(" " + a);
         }
 
+        System.out.println();
+
         // create the max recource matrix in available
         maximum = new int[numberOfResources][numberOfThreads];
 
@@ -43,7 +45,7 @@ public class BankImpl implements Bank {
         }
 
         // Display Banker Max
-        System.out.println("\n\n Banker Max:");
+        System.out.println("\n Banker Max:");
 
         for (int i = 0; i < maximum.length; i++) {
             for (int j = 0; j < maximum[i].length; j++) {
@@ -51,6 +53,7 @@ public class BankImpl implements Bank {
             }
             System.out.println();
         }
+        System.out.println();
 
     }
 
