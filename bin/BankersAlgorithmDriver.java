@@ -98,6 +98,8 @@ public class BankersAlgorithmDriver {
 
     //we can start the project
 
+    Bank theBank = new Bank
+
   }
 
 }// end of class

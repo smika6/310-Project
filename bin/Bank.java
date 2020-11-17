@@ -1,4 +1,4 @@
-public class Bank implements BankInterface{
+public class BankImpl implements Bank{
 
     public Bank(int m, int n){
 
@@ -30,7 +30,7 @@ public class Bank implements BankInterface{
 }
 
 
-interface BankInterface {
+interface Bank {
 
     /**
      * Add a customer
