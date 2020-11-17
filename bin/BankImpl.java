@@ -6,7 +6,7 @@ public class BankImpl implements Bank {
     int minAvailable = 1;
     int maxAvailable = 10;
     int minNeed = 0;
-    
+
     int[] available;
 
     int[][] maximum;
@@ -62,18 +62,18 @@ public class BankImpl implements Bank {
     public void getState() {
 
         // Display Allocation
-        displayOnCommandLine("\n[DISPLAY]: Allocation:\n");
+        displayOnCommandLine("\n[DISPLAY]: Bank - Initial Resources Available:\n");
 
         for (int a : this.available) {
-            displayOnCommandLine(" " + a);
+            displayOnCommandLine(a + " ");
         }
         
         // Display Banker Max
-        displayOnCommandLine("\n\n[DISPLAY]: Banker Max:\n");
+        displayOnCommandLine("\n\n[DISPLAY]: Bank - Max:\n");
 
         for (int i = 0; i < this.maximum.length; i++) {
             for (int j = 0; j < this.maximum[i].length; j++) {
-                displayOnCommandLine(" " + this.maximum[i][j]);
+                displayOnCommandLine(this.maximum[i][j] + " ");
             }
             displayOnCommandLine("\n");
         }
