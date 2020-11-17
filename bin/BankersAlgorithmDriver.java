@@ -29,8 +29,8 @@ public class BankersAlgorithmDriver {
           "[ERROR]: Invalid input for count of resources: %s, value must be between %s and %s.%n", countOfRecources,
           lowerRange, upperRange);
       String threadCountInvalidString = String.format(
-          "[ERROR]: Invalid input for count of threads: %s, value must be between %s and %s.%n", countOfThreads, lowerRange,
-          upperRange);
+          "[ERROR]: Invalid input for count of threads: %s, value must be between %s and %s.%n", countOfThreads,
+          lowerRange, upperRange);
 
       if (countOfRecources < lowerRange || countOfRecources > upperRange) {
         displayOnCommandLine(recourceCountInvalidString);
@@ -83,20 +83,20 @@ public class BankersAlgorithmDriver {
 
   }// end of main
 
-  private static void displayOnCommandLine(Object o){
+  private static void displayOnCommandLine(Object o) {
 
     System.out.print(o);
 
   }
 
-  private static void run(int recourceCount, int threadCount){
-    
+  private static void run(int recourceCount, int threadCount) {
+
     // alert user of inputs provided.
     String displayInputsString = String.format("%n[INFO]: Running Simulation with %s recource(s) and %s thread(s).%n",
         recourceCount, threadCount);
     displayOnCommandLine(displayInputsString);
 
-    //we can start the project
+    // we can start the project
 
     Bank theBank = new BankImpl(recourceCount, threadCount);
 
