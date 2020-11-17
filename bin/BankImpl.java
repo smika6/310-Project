@@ -24,10 +24,10 @@ public class BankImpl implements Bank {
         }
 
         // Display Allocation
-        System.out.print("\n[DISPLAY]: Allocation:\n");
+        displayOnCommandLine("\n[DISPLAY]: Allocation:\n");
 
         for (int a : available) {
-            System.out.print(" " + a);
+            displayOnCommandLine(" " + a);
         }
 
         // create the max recource matrix in available
@@ -43,13 +43,13 @@ public class BankImpl implements Bank {
         }
 
         // Display Banker Max
-        System.out.println("\n\n[DISPLAY]: Banker Max:");
+        displayOnCommandLine("\n\n[DISPLAY]: Banker Max:\n");
 
         for (int i = 0; i < maximum.length; i++) {
             for (int j = 0; j < maximum[i].length; j++) {
-                System.out.print(" " + maximum[i][j]);
+                displayOnCommandLine(" " + maximum[i][j]);
             }
-            System.out.println();
+            displayOnCommandLine("\n");
         }
 
     }
@@ -77,4 +77,10 @@ public class BankImpl implements Bank {
         // TODO Auto-generated method stub
         return false;
     }
+
+    private static void displayOnCommandLine(Object o) {
+
+        System.out.print(o);
+    
+      }
 }
