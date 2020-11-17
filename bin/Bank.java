@@ -1,7 +1,15 @@
 public class BankImpl implements Bank{
 
-    public Bank(int m, int n){
+    int numberOfThreads;
+    int numberOfRecources;
 
+    int[] available;
+
+    public Bank(int m, int n){
+        this.numberOfRecources = m;
+        this.numberOfThreads = n;
+
+        //create the max recource matrix in available
     }
 
     @Override
