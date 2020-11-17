@@ -1,16 +1,17 @@
-public class BankImpl implements Bank{
+public class BankImpl implements Bank {
 
     int numberOfThreads;
     int numberOfRecources;
 
     int[] available;
+
     int[][] maximum;
 
     public BankImpl(int m, int n) {
         this.numberOfRecources = m;
         this.numberOfThreads = n;
 
-        //create the max recource matrix in available
+        // create the max recource matrix in available
         maximum = new int[numberOfRecources][numberOfThreads];
     }
 
@@ -39,13 +40,13 @@ public class BankImpl implements Bank{
     }
 }
 
-
 interface Bank {
 
     /**
      * Add a customer
+     * 
      * @param customerNum - the number of the customer
-     * @param maxDemand  - the maximum demand for this customer
+     * @param maxDemand   - the maximum demand for this customer
      */
     public void addCustomer(int customerNum, int[] maxDemand);
 
@@ -53,7 +54,7 @@ interface Bank {
      * Output the value of available
      */
     public void getState();
-    
+
     /**
      * 
      * @param customerNumber
