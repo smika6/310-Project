@@ -51,6 +51,7 @@ public class BankImpl implements Bank {
             }
             displayOnCommandLine("\n");
         }
+        displayOnCommandLine("\n");
 
     }
 
