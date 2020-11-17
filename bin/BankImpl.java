@@ -42,16 +42,14 @@ public class BankImpl implements Bank {
         }
 
         // Display Banker Max
-        System.out.print("\n\n Banker Max:");
+        System.out.println("\n\n Banker Max:");
 
         for (int i = 0; i < maximum.length; i++) {
-            System.out.println();
-
             for (int j = 0; j < maximum[i].length; j++) {
                 System.out.print(" " + maximum[i][j]);
             }
+            System.out.println();
         }
-        System.out.println();
 
     }
 
