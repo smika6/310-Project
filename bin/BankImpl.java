@@ -7,6 +7,7 @@ public class BankImpl implements Bank {
     int maxAvailable = 10;
     int[] available;
 
+    int minNeed = 0;
     int[][] maximum;
 
     public BankImpl(int m, int n) {
@@ -35,7 +36,7 @@ public class BankImpl implements Bank {
         for (int i = 0; i < this.numberOfResources; i++) {
             for (int j = 0; j < this.numberOfThreads; j++) {
 
-                int maxs = (int) Math.round(Math.random() * (this.available[i] - minAvailable) + minAvailable);
+                int maxs = (int) Math.round(Math.random() * (this.available[i] - minNeed) + minNeed);
                 maximum[i][j] = maxs;
 
             }
