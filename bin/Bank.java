@@ -7,9 +7,24 @@ public interface Bank {
      */
     public void addCustomer(int customerNum, int[] maxDemand);
 
+    /**
+     * 
+     */
     public void getState();
     
+    /**
+     * 
+     * @param customerNumber
+     * @param request
+     * @return
+     */
     public boolean requestRecources(int customerNumber, int[] request);
 
+    /**
+     * 
+     * @param customerNumber
+     * @param release
+     * @return
+     */
     public boolean releaseRecources(int customerNumber, int[] release);
 }
