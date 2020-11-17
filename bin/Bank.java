@@ -6,7 +6,7 @@ public class BankImpl implements Bank{
     int[] available;
     int[][] maximum;
 
-    public Bank(int m, int n){
+    public BankImpl(int m, int n) {
         this.numberOfRecources = m;
         this.numberOfThreads = n;
 
