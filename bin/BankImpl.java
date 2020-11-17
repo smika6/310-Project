@@ -22,6 +22,10 @@ public class BankImpl implements Bank {
             available[i] = allocationOfResource;
         }
 
+        
+        // Display Allocation
+        System.out.print("\n Allocation:");
+
         for(int a:available){
             System.out.print(" " + a);
         }
@@ -42,7 +46,7 @@ public class BankImpl implements Bank {
         }
 
         // Display Banker Max
-        System.out.print("\n Banker Max:");
+        System.out.print("\n\n Banker Max:");
 
         for (int i = 0; i < maximum.length; i++)
         {
