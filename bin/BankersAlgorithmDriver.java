@@ -7,8 +7,8 @@ public class BankersAlgorithmDriver {
     int lowerRange = 1;
     int upperRange = 10;
 
-    int recourceCount = -1;
-    int threadCount = -1;
+    int countOfRecources = -1;
+    int countOfThreads = -1;
 
     // m and n are provided through the command line
     if (args.length >= 2) {
@@ -17,8 +17,8 @@ public class BankersAlgorithmDriver {
 
       try { // Attempt to convert command line inputs into integers
 
-        recourceCount = Integer.parseInt(args[0]);
-        threadCount = Integer.parseInt(args[1]);
+        countOfRecources = Integer.parseInt(args[0]);
+        countOfThreads = Integer.parseInt(args[1]);
 
       } catch (NumberFormatException e) {
         displayOnCommandLine("[ERROR]: Command Line Parameters could not be converted to Integers.\n");
@@ -26,18 +26,18 @@ public class BankersAlgorithmDriver {
       }
 
       String recourceCountInvalidString = String.format(
-          "[ERROR]: Invalid input for count of resources: %s, value must be between %s and %s.%n", recourceCount,
+          "[ERROR]: Invalid input for count of resources: %s, value must be between %s and %s.%n", countOfRecources,
           lowerRange, upperRange);
       String threadCountInvalidString = String.format(
-          "[ERROR]: Invalid input for count of threads: %s, value must be between %s and %s.%n", threadCount, lowerRange,
+          "[ERROR]: Invalid input for count of threads: %s, value must be between %s and %s.%n", countOfThreads, lowerRange,
           upperRange);
 
-      if (recourceCount < lowerRange || recourceCount > upperRange) {
+      if (countOfRecources < lowerRange || countOfRecources > upperRange) {
         displayOnCommandLine(recourceCountInvalidString);
         validInput = false;
       }
 
-      if (threadCount < lowerRange || threadCount > upperRange) {
+      if (countOfThreads < lowerRange || countOfThreads > upperRange) {
         displayOnCommandLine(threadCountInvalidString);
         validInput = false;
       }
@@ -57,17 +57,17 @@ public class BankersAlgorithmDriver {
           upperRange);
 
       // read in the count of resources, ensuring valid input
-      while (recourceCount < lowerRange || recourceCount > upperRange) {
+      while (countOfRecources < lowerRange || countOfRecources > upperRange) {
         displayOnCommandLine(recourceCountRequestString);
-        recourceCount = commandlineScanner.nextInt();
+        countOfRecources = commandlineScanner.nextInt();
       }
 
       displayOnCommandLine("\n");
 
       // read in the count of threads, ensuring valid input
-      while (threadCount < lowerRange || threadCount > upperRange) {
+      while (countOfThreads < lowerRange || countOfThreads > upperRange) {
         displayOnCommandLine(threadCountRequestString);
-        threadCount = commandlineScanner.nextInt();
+        countOfThreads = commandlineScanner.nextInt();
       }
 
       // release recource
@@ -79,7 +79,7 @@ public class BankersAlgorithmDriver {
     }
 
     // we have valid inputs from here and can run the simulation
-    run(recourceCount, threadCount); // temp name cuz im getting hungry
+    run(countOfRecources, countOfThreads); // temp name cuz im getting hungry
 
   }// end of main
 
