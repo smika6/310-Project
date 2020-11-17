@@ -36,7 +36,7 @@ public class BankImpl implements Bank {
         for (int i = 0; i < maximum.length; i++) {
             for (int j = 0; j < maximum[i].length; j++) {
 
-                int maxs = (int) Math.round(Math.random() * (this.available[i] - minNeed) + minNeed);
+                int maxs = (int) Math.round(Math.random() * (this.available[j] - minNeed) + minNeed);
                 maximum[i][j] = maxs;
 
             }
