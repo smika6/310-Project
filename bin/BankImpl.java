@@ -39,7 +39,6 @@ public class BankImpl implements Bank {
                 maximum[i][j] = maxs;
 
             }
-
         }
 
         // Display Banker Max
@@ -51,7 +50,6 @@ public class BankImpl implements Bank {
             for (int j = 0; j < maximum[i].length; j++) {
                 System.out.print(" " + maximum[i][j]);
             }
-
         }
 
     }
