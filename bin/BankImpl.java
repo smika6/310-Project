@@ -45,12 +45,13 @@ public class BankImpl implements Bank {
         System.out.print("\n\n Banker Max:");
 
         for (int i = 0; i < maximum.length; i++) {
-            System.out.print("\n");
+            System.out.println();
 
             for (int j = 0; j < maximum[i].length; j++) {
                 System.out.print(" " + maximum[i][j]);
             }
         }
+        System.out.println();
 
     }
 
