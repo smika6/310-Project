@@ -9,6 +9,9 @@ public class BankImpl implements Bank {
 
     int minNeed = 0;
     int[][] maximum;
+    int[][] allocation;
+    
+    int[][] need;
 
     public BankImpl(int m, int n) {
         this.numberOfResources = m;
@@ -74,9 +77,8 @@ public class BankImpl implements Bank {
     }
 
     @Override
-    public boolean releaseRecources(int customerNumber, int[] release) {
+    public void releaseRecources(int customerNumber, int[] release) {
         // TODO Auto-generated method stub
-        return false;
     }
 
     private static void displayOnCommandLine(Object o) {
