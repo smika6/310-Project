@@ -24,19 +24,17 @@ public class BankImpl implements Bank {
         }
 
         // Display Allocation
-        System.out.print("\n Allocation:");
+        System.out.print("\n[DISPLAY]: Allocation:\n");
 
         for (int a : available) {
             System.out.print(" " + a);
         }
 
-        System.out.println();
-
         // create the max recource matrix in available
-        maximum = new int[numberOfResources][numberOfThreads];
+        maximum = new int[numberOfThreads][numberOfResources];
 
-        for (int i = 0; i < this.numberOfResources; i++) {
-            for (int j = 0; j < this.numberOfThreads; j++) {
+        for (int i = 0; i < maximum.length; i++) {
+            for (int j = 0; j < maximum[i].length; j++) {
 
                 int maxs = (int) Math.round(Math.random() * (this.available[i] - minNeed) + minNeed);
                 maximum[i][j] = maxs;
@@ -45,7 +43,7 @@ public class BankImpl implements Bank {
         }
 
         // Display Banker Max
-        System.out.println("\n Banker Max:");
+        System.out.println("\n[DISPLAY]: Banker Max:");
 
         for (int i = 0; i < maximum.length; i++) {
             for (int j = 0; j < maximum[i].length; j++) {
@@ -53,7 +51,6 @@ public class BankImpl implements Bank {
             }
             System.out.println();
         }
-        System.out.println();
 
     }
 
