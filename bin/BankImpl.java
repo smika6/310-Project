@@ -65,7 +65,7 @@ public class BankImpl implements Bank {
         for (int i = 0; i < this.numberOfResources; i++){
             int customerNeed = maximum[customerNum][i] - allocation[customerNum][i];
 
-            need[customerNum][i] += customerNeed = Math.abs(customerNeed);
+            need[customerNum][i] = customerNeed = Math.abs(customerNeed);
 
         }
 
@@ -142,7 +142,7 @@ public class BankImpl implements Bank {
         allocation = new int[numberOfThreads][numberOfResources];
 
         // Create customer resource request
-        // ISSUE HERE: SOMETIME IT GENERATE A VALUE BETTER THAN BANK MAX.
+        // ISSUE HERE: SOMETIME IT GENERATE A VALUE BIGGER THAN BANK MAX.
         for (int l = 0; l < this.numberOfResources; l++) {
             int customerNeed = (int) Math.round(Math.random() * (this.maximum[customerNumber][l] - minAvailable) + minAvailable);
             customerResource[l] = customerNeed;
