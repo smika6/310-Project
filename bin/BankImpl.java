@@ -44,8 +44,8 @@ public class BankImpl implements Bank {
         getState();
 
         // TEST RUN 
-        requestResources(1);
-        addCustomer(1);
+        requestResources(0);
+        addCustomer(0);
 
     }
 
@@ -142,9 +142,8 @@ public class BankImpl implements Bank {
         allocation = new int[numberOfThreads][numberOfResources];
 
         // Create customer resource request
-        // ISSUE HERE: SOMETIME IT GENERATE A VALUE BIGGER THAN BANK MAX.
         for (int l = 0; l < this.numberOfResources; l++) {
-            int customerNeed = (int) Math.round(Math.random() * (this.maximum[customerNumber][l] - minAvailable) + minAvailable);
+            int customerNeed = (int) Math.round(Math.random() * (this.maximum[customerNumber][l] - minNeed) + minNeed);
             customerResource[l] = customerNeed;
 
             // Track resource already allocation + new resource request from the same customer
