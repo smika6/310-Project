@@ -67,10 +67,7 @@ public class BankImpl implements Bank {
             
             int customerNeed = maximum[customerNum][i] - allocation[customerNum][i];
 
-            // In case it a negative value, change it to positive
-            customerNeed = Math.abs(customerNeed);
-
-            need[customerNum][i] = customerNeed;
+            need[customerNum][i] = customerNeed = Math.abs(customerNeed);
 
         }
 
