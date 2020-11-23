@@ -63,11 +63,9 @@ public class BankImpl implements Bank {
         need = new int[numberOfThreads][numberOfResources];
 
         for (int i = 0; i < this.numberOfResources; i++){
-            
-            
             int customerNeed = maximum[customerNum][i] - allocation[customerNum][i];
 
-            need[customerNum][i] = customerNeed = Math.abs(customerNeed);
+            need[customerNum][i] += customerNeed = Math.abs(customerNeed);
 
         }
 
