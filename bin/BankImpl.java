@@ -198,12 +198,12 @@ public class BankImpl implements Bank {
     @Override
     public void runProcess(int customerNumber){
 
-        boolean run = false;
+        boolean safe = false;
         
         // Can process run?
         for (int i = 0; i < this.numberOfResources; i++){
             if (currentAvailable[i] >= need[customerNumber][i])
-                run = true;
+                safe = true;
                 else{
                     run = false;
                     break;
@@ -215,7 +215,7 @@ public class BankImpl implements Bank {
         * Process is clear to run
         * Display current available resource after a process run
         */
-        if(run){
+        if(safe){
 
             for (int j = 0; j < this.numberOfResources; j++)
             currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
