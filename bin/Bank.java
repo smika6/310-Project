@@ -27,4 +27,11 @@ public interface Bank {
      * @param release        - the resources being released
      */
     public void releaseRecources(int customerNumber, int[] release);
+
+    /**
+     * Check and see if processor can run
+     * 
+     * @param customerNumber - the customer number
+     */
+    public void runProcess(int customerNumber);
 }

@@ -8,6 +8,7 @@ public class BankImpl implements Bank {
     int minNeed = 0;
 
     int[] available;
+    int[] currentAvailable;
 
     int[] customerResource;
 
@@ -20,13 +21,15 @@ public class BankImpl implements Bank {
         this.numberOfResources = m;
         this.numberOfThreads = n;
 
-        // populate available array with the max available for each recource
+        // populate available array with the max available for each resource
         available = new int[this.numberOfResources];
+        currentAvailable = new int[this.numberOfResources];
 
         for (int i = 0; i < this.numberOfResources; i++) {
             int allocationOfResource = (int) Math
                     .round(Math.random() * (this.maxAvailable - minAvailable) + minAvailable);
             available[i] = allocationOfResource;
+            currentAvailable[i] = allocationOfResource;
         }
 
         // create the max recource matrix in available
@@ -46,6 +49,7 @@ public class BankImpl implements Bank {
         // TEST RUN 
         requestResources(0);
         addCustomer(0);
+        runProcess(0);
     
     }
 
@@ -185,4 +189,47 @@ public class BankImpl implements Bank {
         System.out.print(o);
 
     }
+
+     /**
+     * Check and see if processor can run
+     * 
+     * @param customerNumber - the customer number
+     */
+    @Override
+    public void runProcess(int customerNumber){
+
+        boolean run = false;
+        
+        // Can process run?
+        for (int i = 0; i < this.numberOfResources; i++){
+            if (currentAvailable[i] >= need[customerNumber][i])
+                run = true;
+                else{
+                    run = false;
+                    break;
+                }
+                
+        }
+
+        /* 
+        * Process is clear to run
+        * Display current available resource after a process run
+        */
+        if(run){
+
+            for (int j = 0; j < this.numberOfResources; j++)
+            currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
+        
+            displayOnCommandLine("Customer " + customerNumber + " is safe \n");
+            displayOnCommandLine("\n[DISPLAY]: Current Available Resource: \n");
+
+            for (int c : this.currentAvailable) 
+                displayOnCommandLine(c + " ");
+             
+        }
+
+        displayOnCommandLine("\n\n");
+        
+    }
+    
 }
