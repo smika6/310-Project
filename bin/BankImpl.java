@@ -205,7 +205,7 @@ public class BankImpl implements Bank {
             if (currentAvailable[i] >= need[customerNumber][i])
                 safe = true;
                 else{
-                    run = false;
+                    safe = false;
                     break;
                 }
                 
