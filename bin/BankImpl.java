@@ -142,16 +142,16 @@ public class BankImpl implements Bank {
 
         allocation = new int[numberOfThreads][numberOfResources];
 
-        for (int l = 0; l < this.numberOfResources; l++) {
-            int customerNeed = (int) Math.round(Math.random() * (this.maximum[customerNumber][l] - minNeed) + minNeed);
-            customerResource[l] = customerNeed;
+        for (int i = 0; i < this.numberOfResources; i++) {
+            int customerNeed = (int) Math.round(Math.random() * (this.maximum[customerNumber][i] - minNeed) + minNeed);
+            customerResource[i] = customerNeed;
 
             // Track resource already allocation + new resource request from the same customer
-            allocation[customerNumber][l] += customerResource[l]; 
+            allocation[customerNumber][i] += customerResource[i]; 
 
             // Make sure allocation resource doesn't exceed maximum resource
-            if (allocation[customerNumber][l] >= maximum[customerNumber][l])
-                allocation[customerNumber][l] = maximum[customerNumber][l];
+            if (allocation[customerNumber][i] >= maximum[customerNumber][i])
+                allocation[customerNumber][i] = maximum[customerNumber]i];
 
         }
 
