@@ -150,8 +150,8 @@ public class BankImpl implements Bank {
             allocation[customerNumber][i] += customerResource[i]; 
 
             // Make sure allocation resource doesn't exceed maximum resource
-            if (allocation[customerNumber][i] >= maximum[customerNumber][i])
-                allocation[customerNumber][i] = maximum[customerNumber]i];
+            if (allocation[customerNumber][i] > maximum[customerNumber][i])
+                allocation[customerNumber][i] = maximum[customerNumber][i];
 
         }
 
