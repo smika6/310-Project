@@ -220,7 +220,7 @@ public class BankImpl implements Bank {
             for (int j = 0; j < this.numberOfResources; j++)
             currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
         
-            displayOnCommandLine("Customer " + customerNumber + " is safe \n");
+            displayOnCommandLine("Customer " + customerNumber + " request is granted\n");
             displayOnCommandLine("\n[DISPLAY]: Current Available Resource: \n");
 
             for (int c : this.currentAvailable) 
