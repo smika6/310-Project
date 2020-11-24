@@ -46,7 +46,7 @@ public class BankImpl implements Bank {
         // TEST RUN 
         requestResources(0);
         addCustomer(0);
-
+    
     }
 
     /**
@@ -137,11 +137,11 @@ public class BankImpl implements Bank {
     public boolean requestResources(int customerNumber) {
         // TODO Auto-generated method stub
 
+        // Create customer resource request
         customerResource = new int[this.numberOfResources];
 
         allocation = new int[numberOfThreads][numberOfResources];
 
-        // Create customer resource request
         for (int l = 0; l < this.numberOfResources; l++) {
             int customerNeed = (int) Math.round(Math.random() * (this.maximum[customerNumber][l] - minNeed) + minNeed);
             customerResource[l] = customerNeed;
@@ -149,7 +149,12 @@ public class BankImpl implements Bank {
             // Track resource already allocation + new resource request from the same customer
             allocation[customerNumber][l] += customerResource[l]; 
 
+            // Make sure allocation resource doesn't exceed maximum resource
+            if (allocation[customerNumber][l] >= maximum[customerNumber][l])
+                allocation[customerNumber][l] = maximum[customerNumber][l];
+
         }
+
 
         // Diplay customer resource request
         // CAN MOVE THIS CODE LATER
