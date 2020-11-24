@@ -10,6 +10,7 @@ public class Bank {
     int[] available;
 
     int[] currentAvailable;
+
     int[] customerResource;
 
     int[][] maximum;
@@ -23,6 +24,7 @@ public class Bank {
 
         // populate available array with the max available for each resource
         available = new int[this.numberOfResources];
+
         currentAvailable = new int[this.numberOfResources];
 
         for (int i = 0; i < this.numberOfResources; i++) {
@@ -43,27 +45,30 @@ public class Bank {
 
             }
         }
-        
-        // Create customer resource need
+
+        // initialize allocation table
+        allocation = new int[numberOfThreads][numberOfResources];
+
+        // initialize customer resource need table
         need = new int[numberOfThreads][numberOfResources];
+
+        // initialize customer resource request array
+        customerResource = new int[this.numberOfResources];
 
         getState();
 
-        /* TEST RUN
+        // TEST RUN
         requestResources(0);
-        addCustomer(0);
+        calculateCustomerNeed(0);
         runProcess(0);
-        */
 
     }
 
     /**
      * 
      * @param customerNum - the number of the customer
-     * @param maxDemand   - the maximum demand for this customer
      */
     public void calculateCustomerNeed(int customerNum) {
-        // TODO Auto-generated method stub
 
         for (int i = 0; i < this.numberOfResources; i++) {
             int customerNeed = maximum[customerNum][i] - allocation[customerNum][i];
@@ -71,60 +76,6 @@ public class Bank {
             need[customerNum][i] = customerNeed = Math.abs(customerNeed);
 
         }
-
-        // Display customer allocation
-        // CAN MOVE CODE LATER
-        displayOnCommandLine("\n[DISPLAY]: Customer Allocation: \n");
-
-        for (int j = 0; j < this.allocation.length; j++) {
-            for (int k = 0; k < this.allocation[j].length; k++) {
-                displayOnCommandLine(this.allocation[j][k] + " ");
-            }
-
-            displayOnCommandLine("\n");
-
-        }
-
-        // Display customer resource need
-        // CAN MOVE CODE LATER
-        displayOnCommandLine("\n[DISPLAY]: Customer Resource Need: \n");
-
-        for (int j = 0; j < this.need.length; j++) {
-            for (int k = 0; k < this.need[j].length; k++) {
-                displayOnCommandLine(this.need[j][k] + " ");
-            }
-
-            displayOnCommandLine("\n");
-
-        }
-
-        displayOnCommandLine("\n");
-
-    }
-
-    /**
-     * Output the value of available, maximum, allocation, and need
-     */
-    public void getState() {
-
-        // Display Allocation
-        displayOnCommandLine("\n[DISPLAY]: Bank - Initial Resources Available:\n");
-
-        for (int a : this.available) {
-            displayOnCommandLine(a + " ");
-        }
-
-        // Display customer resource need
-        displayOnCommandLine("\n\n[DISPLAY]: Bank - Max:\n");
-
-        for (int i = 0; i < this.maximum.length; i++) {
-            for (int j = 0; j < this.maximum[i].length; j++) {
-                displayOnCommandLine(this.maximum[i][j] + " ");
-            }
-            displayOnCommandLine("\n");
-        }
-
-        displayOnCommandLine("\n");
 
     }
 
@@ -136,11 +87,6 @@ public class Bank {
      * @return
      */
     public boolean requestResources(int customerNumber) {
-
-        // Create customer resource request
-        customerResource = new int[this.numberOfResources];
-
-        allocation = new int[numberOfThreads][numberOfResources];
 
         for (int i = 0; i < this.numberOfResources; i++) {
             int customerNeed = (int) Math.round(Math.random() * (this.maximum[customerNumber][i] - minNeed) + minNeed);
@@ -180,19 +126,7 @@ public class Bank {
 
     }
 
-    private static void displayOnCommandLine(Object o) {
-
-        System.out.print(o);
-
-    }
-
-    /**
-     * Check and see if processor can run
-     * 
-     * @param customerNumber - the customer number
-     */
-    public void runProcess(int customerNumber) {
-
+    public boolean safeProcess(int customerNumber) {
         boolean safe = false;
 
         // Can process run?
@@ -206,26 +140,112 @@ public class Bank {
 
         }
 
+        return safe;
+    }
+
+    /**
+     * Check and see if processor can run
+     * 
+     * @param customerNumber - the customer number
+     */
+    public void runProcess(int customerNumber) {
+
         /*
          * Process is clear to run Display current available resource after a process
          * run
          */
-        if (safe) {
+        if (safeProcess(customerNumber)) {
 
             for (int j = 0; j < this.numberOfResources; j++) {
                 currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
 
-                displayOnCommandLine("Customer " + customerNumber + " request is granted\n");
-                displayOnCommandLine("\n[DISPLAY]: Current Available Work: \n");
-
-                for (int c : this.currentAvailable) {
-                    displayOnCommandLine(c + " ");
-                }
-
             }
+            displayOnCommandLine("\n\nCustomer " + customerNumber + " request is granted\n");
+            
+            displayCurrentlyAvailable();
 
             displayOnCommandLine("\n\n");
 
         }
+    }
+
+    private static void displayOnCommandLine(Object o) {
+
+        System.out.print(o);
+
+    }
+    
+    public void displayAllocation() {
+        // Display customer allocation
+        displayOnCommandLine("\n[DISPLAY]: Bank - Allocation: \n");
+
+        for (int j = 0; j < this.allocation.length; j++) {
+            for (int k = 0; k < this.allocation[j].length; k++) {
+                displayOnCommandLine(this.allocation[j][k] + " ");
+            }
+
+            displayOnCommandLine("\n");
+
+        }
+
+        displayOnCommandLine("\n");
+    }
+
+    public void displayNeed() {
+        // Display customer resource need
+        displayOnCommandLine("\n[DISPLAY]: Bank - Need: \n");
+
+        for (int j = 0; j < this.need.length; j++) {
+            for (int k = 0; k < this.need[j].length; k++) {
+                displayOnCommandLine(this.need[j][k] + " ");
+            }
+
+            displayOnCommandLine("\n");
+
+        }
+
+        displayOnCommandLine("\n");
+    }
+
+    public void displayMax() {
+
+        displayOnCommandLine("\n\n[DISPLAY]: Bank - Max:\n");
+
+        for (int i = 0; i < this.maximum.length; i++) {
+            for (int j = 0; j < this.maximum[i].length; j++) {
+                displayOnCommandLine(this.maximum[i][j] + " ");
+            }
+            displayOnCommandLine("\n");
+        }
+
+        displayOnCommandLine("\n");
+    }
+
+    public void displayAvailable() {
+        // Display Allocation
+        displayOnCommandLine("\n[DISPLAY]: Bank - Initial Resources Available:\n");
+
+        for (int a : this.available) {
+            displayOnCommandLine(a + " ");
+        }
+    }
+
+    public void displayCurrentlyAvailable(){
+        displayOnCommandLine("\n[DISPLAY]: Current Available Work: \n");
+
+        for (int c : this.currentAvailable) {
+            displayOnCommandLine(c + " ");
+        }
+    }
+
+    /**
+     * Output the value of available, maximum, allocation, and need
+     */
+    public void getState() {
+
+        displayAvailable();
+        displayMax();
+        displayAllocation();
+        displayNeed();
     }
 }

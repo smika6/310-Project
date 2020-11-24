@@ -104,12 +104,11 @@ public class BankersAlgorithmDriver {
 
     for (int p = 0; p < customers.length; p++){
       customers[p] = new BankersAlgorithmThread(bank, p);
-      bank.addCustomer(p);
     }
 
-    for(BankersAlgorithmThread p : customers){
-      p.start();
-    }
+    //for(BankersAlgorithmThread p : customers){
+      //p.start();
+    //}
 
   }
 

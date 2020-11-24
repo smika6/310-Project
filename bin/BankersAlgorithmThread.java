@@ -10,7 +10,10 @@ public class BankersAlgorithmThread extends Thread{
 
     @Override
     public void run() {
-        System.out.println("Hello from a thread " + customerNumber +"!");
+
+        bank.requestResources(customerNumber);
+        bank.calculateCustomerNeed(customerNumber);
+
 
     }
     
