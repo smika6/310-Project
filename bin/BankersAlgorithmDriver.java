@@ -79,7 +79,7 @@ public class BankersAlgorithmDriver {
     }
 
     // we have valid inputs from here and can run the simulation
-    run(countOfRecources, countOfThreads); // temp name cuz im getting hungry
+    runBankersAlgorithm(countOfRecources, countOfThreads); // temp name cuz im getting hungry
 
   }// end of main
 
@@ -89,7 +89,7 @@ public class BankersAlgorithmDriver {
 
   }
 
-  private static void run(int recourceCount, int threadCount) {
+  private static void runBankersAlgorithm(int recourceCount, int threadCount) {
 
     // alert user of inputs provided.
     String displayInputsString = String.format("%n[INFO]: Running Simulation with %s recource(s) and %s thread(s).%n",
@@ -98,7 +98,18 @@ public class BankersAlgorithmDriver {
 
     // we can start the project
 
-    Bank theBank = new BankImpl(recourceCount, threadCount);
+    Bank bank = new Bank(recourceCount, threadCount);
+
+    BankersAlgorithmThread[] customers = new BankersAlgorithmThread[threadCount];
+
+    for (int p = 0; p < customers.length; p++){
+      customers[p] = new BankersAlgorithmThread(bank, p);
+      bank.addCustomer(p);
+    }
+
+    for(BankersAlgorithmThread p : customers){
+      p.start();
+    }
 
   }
 
