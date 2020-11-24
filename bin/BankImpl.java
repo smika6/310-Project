@@ -221,7 +221,7 @@ public class BankImpl implements Bank {
             currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
         
             displayOnCommandLine("Customer " + customerNumber + " request is granted\n");
-            displayOnCommandLine("\n[DISPLAY]: Current Available Resource: \n");
+            displayOnCommandLine("\n[DISPLAY]: Current Available Work: \n");
 
             for (int c : this.currentAvailable) 
                 displayOnCommandLine(c + " ");
