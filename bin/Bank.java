@@ -1,3 +1,4 @@
+
 public class Bank {
 
     int numberOfThreads;
@@ -13,6 +14,8 @@ public class Bank {
 
     int[] customerResource;
 
+    int[] safeSequencedCustomers;
+
     int[][] maximum;
     int[][] allocation;
 
@@ -26,6 +29,8 @@ public class Bank {
         available = new int[this.numberOfResources];
 
         currentAvailable = new int[this.numberOfResources];
+
+        safeSequencedCustomers = new int[this.numberOfThreads];
 
         for (int i = 0; i < this.numberOfResources; i++) {
             int allocationOfResource = (int) Math
