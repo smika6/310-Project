@@ -152,7 +152,7 @@ public class Bank {
      * 
      * @param customerNumber - the customer number
      */
-    public void runProcess(int customerNumber) {
+    public void runProcess(int customerNumber, int cycles) {
 
         /*
          * Process is clear to run Display current available resource after a process
@@ -164,7 +164,7 @@ public class Bank {
                 currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
 
             }
-            displayOnCommandLine("Customer " + customerNumber + " request is granted\n");
+            displayOnCommandLine("Customer " + customerNumber + " Request " + cycles +" Is Granted\n");
             
             displayCurrentlyAvailable();
 
@@ -182,7 +182,7 @@ public class Bank {
 
     public void displayCustomerRequest(int customerNumber){
 
-        displayOnCommandLine("[DISPLAY]: Customer " + customerNumber + " Making A Request: \n");
+        displayOnCommandLine("[DISPLAY]: Customer " + customerNumber + " Is Making a Request\n");
 
         for (int b : this.customerResource) {
             displayOnCommandLine(b + " ");
