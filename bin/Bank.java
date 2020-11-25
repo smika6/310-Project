@@ -165,11 +165,11 @@ public class Bank {
                 currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
 
             }
-            displayOnCommandLine("\nCustomer " + customerNumber + " request is granted\n");
+            displayOnCommandLine("Customer " + customerNumber + " request is granted\n");
             
             displayCurrentlyAvailable();
 
-            displayOnCommandLine("\n\n");
+            displayOnCommandLine("\n");
 
         }
     }
@@ -218,14 +218,14 @@ public class Bank {
             }
 
             displayOnCommandLine("\n");
-
         }
 
+        displayOnCommandLine("\n");
     }
 
     public void displayMax() {
 
-        displayOnCommandLine("\n\n[DISPLAY]: Bank - Max:\n");
+        displayOnCommandLine("\n[DISPLAY]: Bank - Max:\n");
 
         for (int i = 0; i < this.maximum.length; i++) {
             for (int j = 0; j < this.maximum[i].length; j++) {
@@ -233,8 +233,6 @@ public class Bank {
             }
             displayOnCommandLine("\n");
         }
-
-        displayOnCommandLine("\n");
     }
 
     public void displayAvailable() {
@@ -244,6 +242,8 @@ public class Bank {
         for (int a : this.available) {
             displayOnCommandLine(a + " ");
         }
+
+        displayOnCommandLine("\n");
     }
 
     public void displayCurrentlyAvailable(){
@@ -252,6 +252,8 @@ public class Bank {
         for (int c : this.currentAvailable) {
             displayOnCommandLine(c + " ");
         }
+
+        displayOnCommandLine("\n");
     }
 
     /**
