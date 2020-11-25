@@ -92,7 +92,7 @@ public class BankersAlgorithmDriver {
   private static void runBankersAlgorithm(int recourceCount, int threadCount) {
 
     // alert user of inputs provided.
-    String displayInputsString = String.format("%n[INFO]: Running Simulation with %s recource(s) and %s thread(s).%n",
+    String displayInputsString = String.format("%n[INFO]: Running Simulation with %s resource(s) and %s thread(s).%n",
         recourceCount, threadCount);
     displayOnCommandLine(displayInputsString);
 
@@ -106,9 +106,9 @@ public class BankersAlgorithmDriver {
       customers[p] = new BankersAlgorithmThread(bank, p);
     }
 
-    //for(BankersAlgorithmThread p : customers){
-      //p.start();
-    //}
+    for(BankersAlgorithmThread p : customers){
+     p.start();
+   }
 
   }
 

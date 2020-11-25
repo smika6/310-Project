@@ -63,9 +63,12 @@ public class Bank {
         getState();
 
         // TEST RUN
+        /*
         requestResources(0);
         calculateCustomerNeed(0);
         runProcess(0);
+        */
+        
 
     }
 
@@ -81,6 +84,8 @@ public class Bank {
             need[customerNum][i] = customerNeed = Math.abs(customerNeed);
 
         }
+
+        displayNeed();
 
     }
 
@@ -108,14 +113,9 @@ public class Bank {
         }
 
         // Diplay customer resource request
-        // CAN MOVE THIS CODE LATER
-        displayOnCommandLine("[DISPLAY]: Customer " + customerNumber + " Making A Request: \n");
-
-        for (int b : this.customerResource) {
-            displayOnCommandLine(b + " ");
-        }
-
-        displayOnCommandLine("\n");
+        displayCustomerRequest(customerNumber);
+        
+        displayAllocation();
 
         return false;
     }
@@ -165,7 +165,7 @@ public class Bank {
                 currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
 
             }
-            displayOnCommandLine("\n\nCustomer " + customerNumber + " request is granted\n");
+            displayOnCommandLine("\nCustomer " + customerNumber + " request is granted\n");
             
             displayCurrentlyAvailable();
 
@@ -180,6 +180,20 @@ public class Bank {
 
     }
     
+
+    public void displayCustomerRequest(int customerNumber){
+
+        displayOnCommandLine("[DISPLAY]: Customer " + customerNumber + " Making A Request: \n");
+
+        for (int b : this.customerResource) {
+            displayOnCommandLine(b + " ");
+        }
+
+        displayOnCommandLine("\n");
+
+
+    }
+
     public void displayAllocation() {
         // Display customer allocation
         displayOnCommandLine("\n[DISPLAY]: Bank - Allocation: \n");
@@ -192,8 +206,6 @@ public class Bank {
             displayOnCommandLine("\n");
 
         }
-
-        displayOnCommandLine("\n");
     }
 
     public void displayNeed() {
@@ -209,7 +221,6 @@ public class Bank {
 
         }
 
-        displayOnCommandLine("\n");
     }
 
     public void displayMax() {

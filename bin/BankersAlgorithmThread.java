@@ -11,10 +11,11 @@ public class BankersAlgorithmThread extends Thread{
     @Override
     public void run() {
 
-        bank.requestResources(customerNumber);
-        bank.calculateCustomerNeed(customerNumber);
+        synchronized(bank){
 
-
-    }
-    
+            bank.requestResources(customerNumber);
+            bank.calculateCustomerNeed(customerNumber);
+            bank.runProcess(customerNumber);    
+        }
+    }   
 }
