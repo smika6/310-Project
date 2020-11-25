@@ -182,7 +182,7 @@ public class Bank {
 
     public void displayCustomerRequest(int customerNumber){
 
-        displayOnCommandLine("[DISPLAY]: Customer " + customerNumber + " Is Making a Request\n");
+        displayOnCommandLine("[DISPLAY]: Customer " + customerNumber + " Is Making A Request\n");
 
         for (int b : this.customerResource) {
             displayOnCommandLine(b + " ");
