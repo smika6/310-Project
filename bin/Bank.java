@@ -62,9 +62,12 @@ public class Bank {
         getState();
 
         // TEST RUN
+        /*
         requestResources(0);
         calculateCustomerNeed(0);
         runProcess(0);
+        */
+        
 
     }
 
@@ -80,6 +83,8 @@ public class Bank {
             need[customerNum][i] = customerNeed = Math.abs(customerNeed);
 
         }
+
+        displayNeed();
 
     }
 
@@ -107,14 +112,9 @@ public class Bank {
         }
 
         // Diplay customer resource request
-        // CAN MOVE THIS CODE LATER
-        displayOnCommandLine("[DISPLAY]: Customer " + customerNumber + " Making A Request: \n");
-
-        for (int b : this.customerResource) {
-            displayOnCommandLine(b + " ");
-        }
-
-        displayOnCommandLine("\n");
+        displayCustomerRequest(customerNumber);
+        
+        displayAllocation();
 
         return false;
     }
@@ -164,11 +164,11 @@ public class Bank {
                 currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
 
             }
-            displayOnCommandLine("\n\nCustomer " + customerNumber + " request is granted\n");
+            displayOnCommandLine("Customer " + customerNumber + " request is granted\n");
             
             displayCurrentlyAvailable();
 
-            displayOnCommandLine("\n\n");
+            displayOnCommandLine("\n");
 
         }
     }
@@ -179,6 +179,20 @@ public class Bank {
 
     }
     
+
+    public void displayCustomerRequest(int customerNumber){
+
+        displayOnCommandLine("[DISPLAY]: Customer " + customerNumber + " Making A Request: \n");
+
+        for (int b : this.customerResource) {
+            displayOnCommandLine(b + " ");
+        }
+
+        displayOnCommandLine("\n");
+
+
+    }
+
     public void displayAllocation() {
         // Display customer allocation
         displayOnCommandLine("\n[DISPLAY]: Bank - Allocation: \n");
@@ -191,8 +205,6 @@ public class Bank {
             displayOnCommandLine("\n");
 
         }
-
-        displayOnCommandLine("\n");
     }
 
     public void displayNeed() {
@@ -205,7 +217,6 @@ public class Bank {
             }
 
             displayOnCommandLine("\n");
-
         }
 
         displayOnCommandLine("\n");
@@ -213,7 +224,7 @@ public class Bank {
 
     public void displayMax() {
 
-        displayOnCommandLine("\n\n[DISPLAY]: Bank - Max:\n");
+        displayOnCommandLine("\n[DISPLAY]: Bank - Max:\n");
 
         for (int i = 0; i < this.maximum.length; i++) {
             for (int j = 0; j < this.maximum[i].length; j++) {
@@ -221,8 +232,6 @@ public class Bank {
             }
             displayOnCommandLine("\n");
         }
-
-        displayOnCommandLine("\n");
     }
 
     public void displayAvailable() {
@@ -232,6 +241,8 @@ public class Bank {
         for (int a : this.available) {
             displayOnCommandLine(a + " ");
         }
+
+        displayOnCommandLine("\n");
     }
 
     public void displayCurrentlyAvailable(){
@@ -240,6 +251,8 @@ public class Bank {
         for (int c : this.currentAvailable) {
             displayOnCommandLine(c + " ");
         }
+
+        displayOnCommandLine("\n");
     }
 
     /**
