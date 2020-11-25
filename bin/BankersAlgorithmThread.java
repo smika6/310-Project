@@ -11,9 +11,6 @@ public class BankersAlgorithmThread extends Thread{
     @Override
     public void run() {
 
-        bank.requestResources(customerNumber);
-        bank.calculateCustomerNeed(customerNumber);
-
 
     }
     
