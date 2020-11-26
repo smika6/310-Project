@@ -6,6 +6,7 @@ public class Bank {
     int minAvailable = 1;
     int maxAvailable = 10;
     int minNeed = 0;
+    int safeIndex = 0;
 
     int[] available;
 
@@ -130,10 +131,14 @@ public class Bank {
 
     }
 
+      /**
+     * can process run?
+     * 
+     * @param customerNumber - the customer number
+     */
     public boolean safeProcess(int customerNumber) {
         boolean safe = false;
 
-        // Can process run?
         for (int i = 0; i < this.numberOfResources; i++) {
             if (currentAvailable[i] >= need[customerNumber][i])
                 safe = true;
@@ -148,7 +153,7 @@ public class Bank {
     }
 
     /**
-     * Check and see if processor can run
+     * process can run
      * 
      * @param customerNumber - the customer number
      */
@@ -173,12 +178,45 @@ public class Bank {
         }
     }
 
+
+     /**
+     * check to see if a process is safe?
+     * 
+     * @param customerNumber - the customer number
+     */
+    public boolean safeStatus(int customerNumber){
+
+        for (int i = 0; i < this.numberOfResources; i++){
+            if (allocation[customerNumber][i] == maximum[customerNumber][i]);
+            else 
+                return false;
+        }
+
+        safeSequencedCustomers[safeIndex] = customerNumber;
+        safeIndex++;
+
+        displaySafeSequence(customerNumber);
+
+        return true;
+
+    }
+
     private static void displayOnCommandLine(Object o) {
 
         System.out.print(o);
 
     }
     
+    public void displaySafeSequence(int customerNumber){
+        
+        displayOnCommandLine("[DISPLAY]: Bank - Safe Sequence:\n");
+
+        for (int a : this.safeSequencedCustomers) {
+            displayOnCommandLine(a + " ");
+        }
+
+        displayOnCommandLine("\n");
+    }
 
     public void displayCustomerRequest(int customerNumber){
 
@@ -207,8 +245,9 @@ public class Bank {
         }
     }
 
+    // Display customer resource need
     public void displayNeed() {
-        // Display customer resource need
+        
         displayOnCommandLine("\n[DISPLAY]: Bank - Need: \n");
 
         for (int j = 0; j < this.need.length; j++) {
@@ -234,8 +273,9 @@ public class Bank {
         }
     }
 
+    // Display Allocation
     public void displayAvailable() {
-        // Display Allocation
+       
         displayOnCommandLine("\n[DISPLAY]: Bank - Initial Resources Available:\n");
 
         for (int a : this.available) {

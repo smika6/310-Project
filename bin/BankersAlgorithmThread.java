@@ -21,7 +21,11 @@ public class BankersAlgorithmThread extends Thread{
                     bank.requestResources(customerNumber);
                     bank.calculateCustomerNeed(customerNumber);
                     bank.runProcess(customerNumber, i);
-                  
+
+                    // Stop a thread from running
+                    //if(bank.safeStatus(i));
+
+                
                 }
 
                 Thread.sleep(3000);
