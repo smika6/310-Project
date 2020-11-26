@@ -150,6 +150,7 @@ public class Bank {
 
 
         // Process is safe and enter the safe sequence
+        // ISSUE WITH CODE: 
         safeSequencedCustomers[safeIndex] = customerNumber;
         safeIndex++;
     
@@ -183,7 +184,7 @@ public class Bank {
     
     public void displaySafeSequence(int customerNumber){
         
-        displayOnCommandLine("[DISPLAY]: Bank - Safe Sequence:\n");
+        displayOnCommandLine("[DISPLAY]: Bank - Safe Sequence\n");
 
         for (int a : this.safeSequencedCustomers) {
             displayOnCommandLine(a + " ");
@@ -194,7 +195,7 @@ public class Bank {
 
     public void displayCustomerRequest(int customerNumber){
 
-        displayOnCommandLine("[DISPLAY]: Customer " + customerNumber + " Is Making A Request\n");
+        displayOnCommandLine("\n[DISPLAY]: Customer " + customerNumber + " Is Making A Request\n");
 
         for (int b : this.customerResource) {
             displayOnCommandLine(b + " ");
