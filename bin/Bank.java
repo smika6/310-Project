@@ -140,7 +140,7 @@ public class Bank {
     public void runProcess(int customerNumber, int cycles) {
 
         // Check and See if process is clear to run
-        for (int i = 0; i < this.numberOfResources; i++) {
+        for (int i = 0; i < this.numberOfResources; i++) 
             if (need[customerNumber][i] > currentAvailable[i])
                return;
            
@@ -155,7 +155,7 @@ public class Bank {
 
             displayOnCommandLine("\n");
 
-        }
+        
     }
 
 
