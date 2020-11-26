@@ -129,14 +129,13 @@ public class Bank {
      * @param customerNumber - the customer number
      * @param cycles - thread cycles
      */
-    public void runProcess(int customerNumber, int cycles) {
+    public boolean runProcess(int customerNumber, int cycles) {
 
-        // Check and See if process is clear to run
+        // Check and see if process is clear to run
         for (int i = 0; i < this.numberOfResources; i++) 
             if (need[customerNumber][i] > currentAvailable[i])
-               return;
+               return false;
            
-        
         
         // Run process
         for (int j = 0; j < this.numberOfResources; j++) 
@@ -148,14 +147,31 @@ public class Bank {
 
             displayOnCommandLine("\n");
 
+        return true;
 
-        // Process is safe and enter the safe sequence
-        // ISSUE WITH CODE: 
-        safeSequencedCustomers[safeIndex] = customerNumber;
-        safeIndex++;
+    }
+
+      /**
+     * safe Status
+     * 
+     * @param customerNumber - the customer number
+     * @param cycles - thread cycles
+     */
+    public boolean safeStatus(int customerNumber, int cycles){
+
+        if(runProcess(customerNumber, cycles)){
+
+            // Process is safe and enter the safe sequence
+            // ISSUE WITH CODE: 
+            safeSequencedCustomers[safeIndex] = customerNumber;
+            safeIndex++;
     
-        displaySafeSequence(customerNumber);
+            displaySafeSequence(customerNumber);
 
+            return true;
+
+        }
+        return false;
     }
 
     private static void displayOnCommandLine(Object o) {
