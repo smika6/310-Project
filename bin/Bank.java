@@ -62,14 +62,6 @@ public class Bank {
 
         getState();
 
-        // TEST RUN
-        /*
-        requestResources(0);
-        calculateCustomerNeed(0);
-        runProcess(0);
-        */
-        
-
     }
 
     /**
@@ -145,6 +137,7 @@ public class Bank {
                return;
            
         
+        
         // Run process
         for (int j = 0; j < this.numberOfResources; j++) 
             currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
@@ -155,12 +148,18 @@ public class Bank {
 
             displayOnCommandLine("\n");
 
-        
+
+        // Process is safe and enter the safe sequence
+        safeSequencedCustomers[safeIndex] = customerNumber;
+        safeIndex++;
+    
+        displaySafeSequence(customerNumber);
+
     }
 
 
      /**
-     * check to see if a process is safe?
+     * Stop thread from running if allocation exceed maximum resource
      * 
      * @param customerNumber - the customer number
      */
@@ -171,11 +170,6 @@ public class Bank {
             else 
                 return false;
         }
-
-        safeSequencedCustomers[safeIndex] = customerNumber;
-        safeIndex++;
-
-        displaySafeSequence(customerNumber);
 
         return true;
 
