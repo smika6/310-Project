@@ -131,44 +131,24 @@ public class Bank {
 
     }
 
-      /**
-     * can process run?
-     * 
-     * @param customerNumber - the customer number
-     */
-    public boolean safeProcess(int customerNumber) {
-        boolean safe = false;
-
-        for (int i = 0; i < this.numberOfResources; i++) {
-            if (currentAvailable[i] >= need[customerNumber][i])
-                safe = true;
-            else {
-                safe = false;
-                break;
-            }
-
-        }
-
-        return safe;
-    }
-
     /**
      * process can run
      * 
      * @param customerNumber - the customer number
+     * @param cycles - thread cycles
      */
     public void runProcess(int customerNumber, int cycles) {
 
-        /*
-         * Process is clear to run Display current available resource after a process
-         * run
-         */
-        if (safeProcess(customerNumber)) {
+        // Check and See if process is clear to run
+        for (int i = 0; i < this.numberOfResources; i++) {
+            if (need[customerNumber][i] > currentAvailable[i])
+               return;
+           
+        
+        // Run process
+        for (int j = 0; j < this.numberOfResources; j++) 
+            currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
 
-            for (int j = 0; j < this.numberOfResources; j++) {
-                currentAvailable[j] = allocation[customerNumber][j] + currentAvailable[j];
-
-            }
             displayOnCommandLine("Customer " + customerNumber + " Request " + cycles +" Is Granted\n");
             
             displayCurrentlyAvailable();
