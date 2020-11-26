@@ -158,24 +158,6 @@ public class Bank {
 
     }
 
-
-     /**
-     * Stop thread from running if allocation exceed maximum resource
-     * 
-     * @param customerNumber - the customer number
-     */
-    public boolean safeStatus(int customerNumber){
-
-        for (int i = 0; i < this.numberOfResources; i++){
-            if (allocation[customerNumber][i] == maximum[customerNumber][i]);
-            else 
-                return false;
-        }
-
-        return true;
-
-    }
-
     private static void displayOnCommandLine(Object o) {
 
         System.out.print(o);
