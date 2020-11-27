@@ -7,7 +7,7 @@ public class BankersAlgorithmDriver {
     int lowerRange = 1;
     int upperRange = 10;
 
-    int countOfRecources = -1;
+    int countOfResources = -1;
     int countOfThreads = -1;
 
     // m and n are provided through the command line
@@ -17,7 +17,7 @@ public class BankersAlgorithmDriver {
 
       try { // Attempt to convert command line inputs into integers
 
-        countOfRecources = Integer.parseInt(args[0]);
+        countOfResources = Integer.parseInt(args[0]);
         countOfThreads = Integer.parseInt(args[1]);
 
       } catch (NumberFormatException e) {
@@ -25,15 +25,15 @@ public class BankersAlgorithmDriver {
         validInput = false;
       }
 
-      String recourceCountInvalidString = String.format(
-          "[ERROR]: Invalid input for count of resources: %s, value must be between %s and %s.%n", countOfRecources,
+      String resourceCountInvalidString = String.format(
+          "[ERROR]: Invalid input for count of resources: %s, value must be between %s and %s.%n", countOfResources,
           lowerRange, upperRange);
       String threadCountInvalidString = String.format(
           "[ERROR]: Invalid input for count of threads: %s, value must be between %s and %s.%n", countOfThreads,
           lowerRange, upperRange);
 
-      if (countOfRecources < lowerRange || countOfRecources > upperRange) {
-        displayOnCommandLine(recourceCountInvalidString);
+      if (countOfResources < lowerRange || countOfResources > upperRange) {
+        displayOnCommandLine(resourceCountInvalidString);
         validInput = false;
       }
 
@@ -51,15 +51,15 @@ public class BankersAlgorithmDriver {
 
       Scanner commandlineScanner = new Scanner(System.in);
 
-      String recourceCountRequestString = String.format("[REQUEST]: Input the number of recource types (%s-%s): ",
+      String resourceCountRequestString = String.format("[REQUEST]: Input the number of resource types (%s-%s): ",
           lowerRange, upperRange);
       String threadCountRequestString = String.format("[REQUEST]: Input the number of threads (%s-%s): ", lowerRange,
           upperRange);
 
       // read in the count of resources, ensuring valid input
-      while (countOfRecources < lowerRange || countOfRecources > upperRange) {
-        displayOnCommandLine(recourceCountRequestString);
-        countOfRecources = commandlineScanner.nextInt();
+      while (countOfResources < lowerRange || countOfResources > upperRange) {
+        displayOnCommandLine(resourceCountRequestString);
+        countOfResources = commandlineScanner.nextInt();
       }
 
       displayOnCommandLine("\n");
@@ -70,7 +70,7 @@ public class BankersAlgorithmDriver {
         countOfThreads = commandlineScanner.nextInt();
       }
 
-      // release recource
+      // release resource
       commandlineScanner.close();
 
     } else { // not enough command line parameters provided
@@ -79,7 +79,7 @@ public class BankersAlgorithmDriver {
     }
 
     // we have valid inputs from here and can run the simulation
-    runBankersAlgorithm(countOfRecources, countOfThreads); // temp name cuz im getting hungry
+    runBankersAlgorithm(countOfResources, countOfThreads); // temp name cuz im getting hungry
 
   }// end of main
 
@@ -89,16 +89,16 @@ public class BankersAlgorithmDriver {
 
   }
 
-  private static void runBankersAlgorithm(int recourceCount, int threadCount) {
+  private static void runBankersAlgorithm(int resourceCount, int threadCount) {
 
     // alert user of inputs provided.
     String displayInputsString = String.format("%n[INFO]: Running Simulation with %s resource(s) and %s thread(s).%n",
-        recourceCount, threadCount);
+        resourceCount, threadCount);
     displayOnCommandLine(displayInputsString);
 
     // we can start the project
 
-    Bank bank = new Bank(recourceCount, threadCount);
+    Bank bank = new Bank(resourceCount, threadCount);
 
     BankersAlgorithmThread[] customers = new BankersAlgorithmThread[threadCount];
 

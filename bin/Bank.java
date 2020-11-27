@@ -25,13 +25,25 @@ public class Bank {
         this.numberOfResources = m;
         this.numberOfThreads = n;
 
+        // initialize allocation table
+        allocation = new int[numberOfThreads][numberOfResources];
+
+        // initialize customer resource need table
+        need = new int[numberOfThreads][numberOfResources];
+  
+        // initialize customer resource request array
+        customerResource = new int[this.numberOfResources];
+
         // populate available array with the max available for each resource
         available = new int[this.numberOfResources];
 
+        // initialize current available work resource
         currentAvailable = new int[this.numberOfResources];
 
+        // initialize safe sequence
         safeSequencedCustomers = new int[this.numberOfThreads];
 
+        // create allocation matrix
         for (int i = 0; i < this.numberOfResources; i++) {
             int allocationOfResource = (int) Math
                     .round(Math.random() * (this.maxAvailable - minAvailable) + minAvailable);
@@ -39,7 +51,7 @@ public class Bank {
             currentAvailable[i] = allocationOfResource;
         }
 
-        // create the max recource matrix in available
+        // create the max resource matrix in available
         maximum = new int[numberOfThreads][numberOfResources];
 
         for (int i = 0; i < maximum.length; i++) {
@@ -51,15 +63,7 @@ public class Bank {
             }
         }
 
-        // initialize allocation table
-        allocation = new int[numberOfThreads][numberOfResources];
-
-        // initialize customer resource need table
-        need = new int[numberOfThreads][numberOfResources];
-
-        // initialize customer resource request array
-        customerResource = new int[this.numberOfResources];
-
+    
         getState();
 
     }
@@ -97,11 +101,6 @@ public class Bank {
             // Track resource already allocation + new resource request from the same
             // customer
             allocation[customerNumber][i] += customerResource[i];
-
-            // Make sure allocation resource doesn't exceed maximum resource
-            if (allocation[customerNumber][i] > maximum[customerNumber][i])
-                allocation[customerNumber][i] = maximum[customerNumber][i];
-
         }
 
         // Diplay customer resource request
@@ -118,7 +117,7 @@ public class Bank {
      * @param customerNumber - the customer releasing resources
      * @param release        - the resources being released
      */
-    public void releaseRecources(int customerNumber, int[] release) {
+    public void releaseResources(int customerNumber, int[] release) {
         // TODO Auto-generated method stub
 
     }
