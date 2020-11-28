@@ -69,7 +69,6 @@ public class Bank {
     }
 
     /**
-     * 
      * @param customerNum - the number of the customer
      */
     public void calculateCustomerNeed(int customerNum) {
@@ -87,9 +86,7 @@ public class Bank {
 
     /**
      * Request resources
-     * 
      * @param customerNumber - the customer requesting resources
-     * @param request        - the resources being requested
      * @return
      */
     public boolean requestResources(int customerNumber) {
@@ -98,8 +95,7 @@ public class Bank {
             int customerNeed = (int) Math.round(Math.random() * (this.maximum[customerNumber][i] - minNeed) + minNeed);
             customerResource[i] = customerNeed;
 
-            // Track resource already allocation + new resource request from the same
-            // customer
+            // Track resource already allocation + new resource request from the same customer
             allocation[customerNumber][i] += customerResource[i];
         }
 
@@ -112,8 +108,7 @@ public class Bank {
     }
 
     /**
-     * Release resources
-     * 
+     * Release resource
      * @param customerNumber - the customer releasing resources
      * @param release        - the resources being released
      */
@@ -124,7 +119,6 @@ public class Bank {
 
     /**
      * process can run
-     * 
      * @param customerNumber - the customer number
      * @param cycles - thread cycles
      */
@@ -152,7 +146,6 @@ public class Bank {
 
       /**
      * safe Status
-     * 
      * @param customerNumber - the customer number
      * @param cycles - thread cycles
      */
@@ -190,6 +183,7 @@ public class Bank {
         displayOnCommandLine("\n");
     }
 
+    // Display customer resource request
     public void displayCustomerRequest(int customerNumber){
 
         displayOnCommandLine("\n[DISPLAY]: Customer " + customerNumber + " Is Making A Request\n");
@@ -203,8 +197,9 @@ public class Bank {
 
     }
 
+    // Display customer allocation
     public void displayAllocation() {
-        // Display customer allocation
+        
         displayOnCommandLine("\n[DISPLAY]: Bank - Allocation: \n");
 
         for (int j = 0; j < this.allocation.length; j++) {
@@ -233,6 +228,7 @@ public class Bank {
         displayOnCommandLine("\n");
     }
 
+    // Display bank max
     public void displayMax() {
 
         displayOnCommandLine("\n[DISPLAY]: Bank - Max:\n");
@@ -245,7 +241,7 @@ public class Bank {
         }
     }
 
-    // Display Allocation
+    // Display initial available resource
     public void displayAvailable() {
        
         displayOnCommandLine("\n[DISPLAY]: Bank - Initial Resources Available:\n");
@@ -257,6 +253,7 @@ public class Bank {
         displayOnCommandLine("\n");
     }
 
+    // Display current availalbe work resource
     public void displayCurrentlyAvailable(){
         displayOnCommandLine("\n[DISPLAY]: Current Available Work: \n");
 
