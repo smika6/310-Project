@@ -24,7 +24,7 @@ public class BankersAlgorithmThread extends Thread{
                     while ( !bank.runProcess(customerID, i) ){
                         wait();
                     }
-                    
+
                     bank.safeStatus(customerID);
                 }
 
@@ -37,13 +37,14 @@ public class BankersAlgorithmThread extends Thread{
             catch(Exception e){
                 e.printStackTrace();
             } 
-
+         
         }
 
         synchronized(bank){
             bank.releaseResources(customerID);
             bank.notifyAll();
         }
+
     }
     
 }
