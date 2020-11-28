@@ -7,6 +7,7 @@ public class Bank {
     int maxAvailable = 10;
     int minNeed = 0;
     int safeIndex = 0;
+    int cycles = 0;
 
     int[] available;
 
@@ -14,7 +15,7 @@ public class Bank {
 
     int[] customerResource;
 
-    int[] safeSequencedCustomers;
+    int[][] safeSequencedCustomers;
 
     int[][] maximum;
     int[][] allocation;
@@ -26,10 +27,10 @@ public class Bank {
         this.numberOfThreads = n;
 
         // Initialize allocation table
-        allocation = new int[numberOfThreads][numberOfResources];
+        allocation = new int[this.numberOfThreads][this.numberOfResources];
 
         // Initialize customer resource need table
-        need = new int[numberOfThreads][numberOfResources];
+        need = new int[this.numberOfThreads][this.numberOfResources];
   
         // Initialize customer resource request array
         customerResource = new int[this.numberOfResources];
@@ -41,7 +42,7 @@ public class Bank {
         currentAvailable = new int[this.numberOfResources];
 
         // Initialize safe sequence
-        safeSequencedCustomers = new int[this.numberOfThreads];
+        safeSequencedCustomers = new int[cycles][this.numberOfResources];
 
         // Generated allocation matrix
         for (int i = 0; i < this.numberOfResources; i++) {
@@ -112,9 +113,15 @@ public class Bank {
      * @param customerID - The customer releasing resources
      * @param release        - The resources being released
      */
-    public void releaseResources(int customerID, int[] release) {
+    public void releaseResources(int customerID) {
         // TODO Auto-generated method stub
 
+        // Release allocation matrix
+        for (int i = 0; i < this.numberOfResources; i ++){
+            currentAvailable[i] = currentAvailable[i] - allocation[customerID][i];
+            allocation[customerID][i] = 0;
+      }
+            
     }
 
     /**
@@ -149,31 +156,32 @@ public class Bank {
      * @param customerID - The customer number
      * @param cycles - Thread cycles
      */
-    public boolean safeStatus(int customerID, int cycles){
+    public void safeStatus(int customerID, int cycles){
 
+        // Process is safe and enter the safe sequence
         if(runProcess(customerID, cycles)){
 
-            // Process is safe and enter the safe sequence
-            // ISSUE WITH CODE: 
-            safeSequencedCustomers[safeIndex] = customerID;
+            safeSequencedCustomers[cycles][safeIndex] = customerID;
             safeIndex++;
-    
-            displaySafeSequence(customerID);
+        
 
-            return true;
+            if (safeIndex >= this.numberOfResources)
+                safeIndex = 0;
 
+            displaySafeSequence(cycles);
+            
         }
-        return false;
+        
     }
     
     // Display safe sequence
-    public void displaySafeSequence(int customerID){
+    public void displaySafeSequence(int cycles){
         
         displayOnCommandLine("[DISPLAY]: Bank - Safe Sequence\n");
 
-        for (int a : this.safeSequencedCustomers) {
-            displayOnCommandLine(a + " ");
-        }
+        for (int i = 0; i < this.numberOfResources; i++)
+            displayOnCommandLine(safeSequencedCustomers[cycles][i] + " ");
+        
 
         displayOnCommandLine("\n");
     }

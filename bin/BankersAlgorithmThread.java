@@ -17,16 +17,19 @@ public class BankersAlgorithmThread extends Thread{
             try{
 
                 synchronized(bank){
-                    
+                     
                     bank.requestResources(customerID);
                     bank.calculateCustomerNeed(customerID);
                     while ( !bank.runProcess(customerID, i) ){
                         wait();
                     }
-
                 }
 
-                Thread.sleep(3000);
+                int sleep = (int) Math.round(Math.random() * (5 - 1) + 1);
+
+                sleep = sleep * 1000;
+
+                Thread.sleep(sleep);
 
             }
             catch(Exception e){
@@ -36,9 +39,10 @@ public class BankersAlgorithmThread extends Thread{
         }
 
         synchronized(bank){
-            //bank.releaseResources(customerID, release);
+            bank.releaseResources(customerID);
             bank.notifyAll();
         }
+        
     
     }
     
