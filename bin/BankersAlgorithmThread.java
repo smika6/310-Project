@@ -20,9 +20,12 @@ public class BankersAlgorithmThread extends Thread{
                      
                     bank.requestResources(customerID);
                     bank.calculateCustomerNeed(customerID);
+
                     while ( !bank.runProcess(customerID, i) ){
                         wait();
                     }
+                    
+                    bank.safeStatus(customerID);
                 }
 
                 int sleep = (int) Math.round(Math.random() * (5 - 1) + 1);
@@ -30,11 +33,10 @@ public class BankersAlgorithmThread extends Thread{
                 sleep = sleep * 1000;
 
                 Thread.sleep(sleep);
-
             }
             catch(Exception e){
                 e.printStackTrace();
-            }
+            } 
 
         }
 
@@ -42,8 +44,6 @@ public class BankersAlgorithmThread extends Thread{
             bank.releaseResources(customerID);
             bank.notifyAll();
         }
-        
-    
     }
     
 }

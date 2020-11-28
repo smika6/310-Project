@@ -7,15 +7,14 @@ public class Bank {
     int maxAvailable = 10;
     int minNeed = 0;
     int safeIndex = 0;
-    int cycles = 0;
-
+ 
     int[] available;
 
     int[] currentAvailable;
 
     int[] customerResource;
 
-    int[][] safeSequencedCustomers;
+    int[] safeSequencedCustomers;
 
     int[][] maximum;
     int[][] allocation;
@@ -42,7 +41,7 @@ public class Bank {
         currentAvailable = new int[this.numberOfResources];
 
         // Initialize safe sequence
-        safeSequencedCustomers = new int[cycles][this.numberOfResources];
+        safeSequencedCustomers = new int[this.numberOfThreads];
 
         // Generated allocation matrix
         for (int i = 0; i < this.numberOfResources; i++) {
@@ -111,7 +110,6 @@ public class Bank {
     /**
      * Release resource
      * @param customerID - The customer releasing resources
-     * @param release        - The resources being released
      */
     public void releaseResources(int customerID) {
         // TODO Auto-generated method stub
@@ -156,32 +154,25 @@ public class Bank {
      * @param customerID - The customer number
      * @param cycles - Thread cycles
      */
-    public void safeStatus(int customerID, int cycles){
+    public void safeStatus(int customerID){
 
+        if (safeIndex >= this.numberOfThreads)
+        safeIndex = 0; 
+        
         // Process is safe and enter the safe sequence
-        if(runProcess(customerID, cycles)){
-
-            safeSequencedCustomers[cycles][safeIndex] = customerID;
-            safeIndex++;
-        
-
-            if (safeIndex >= this.numberOfResources)
-                safeIndex = 0;
-
-            displaySafeSequence(cycles);
-            
-        }
-        
+        safeSequencedCustomers[safeIndex] = customerID;
+        safeIndex++;  
+      
     }
     
     // Display safe sequence
-    public void displaySafeSequence(int cycles){
+    public void displaySafeSequence(){
         
-        displayOnCommandLine("[DISPLAY]: Bank - Safe Sequence\n");
+        displayOnCommandLine("\n[DISPLAY]: Bank - Safe Sequence\n");
 
-        for (int i = 0; i < this.numberOfResources; i++)
-            displayOnCommandLine(safeSequencedCustomers[cycles][i] + " ");
-        
+      
+        for (int i = 0; i < this.numberOfThreads; i++)
+            displayOnCommandLine(safeSequencedCustomers[i] + " ");
 
         displayOnCommandLine("\n");
     }
