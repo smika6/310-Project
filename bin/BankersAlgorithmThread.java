@@ -22,15 +22,22 @@ public class BankersAlgorithmThread extends Thread{
                     bank.calculateCustomerNeed(customerID);
                     while ( !bank.runProcess(customerID, i) ){
                         wait();
-                    }            
+                    }
+
                 }
 
                 Thread.sleep(3000);
+
             }
             catch(Exception e){
-                System.out.println("\nException has been caught");
+                e.printStackTrace();
             }
 
+        }
+
+        synchronized(bank){
+            bank.releaseResources(customerID, release);
+            notifyAll();
         }
     
     }
