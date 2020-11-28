@@ -1,12 +1,12 @@
 public class BankersAlgorithmThread extends Thread{
 
     Bank bank;
-    int customerNumber;
+    int customerID;
     int cycles;
 
-    public BankersAlgorithmThread(Bank b, int customerNumber){
+    public BankersAlgorithmThread(Bank b, int customerID){
         this.bank = b;
-        this.customerNumber = customerNumber;
+        this.customerID = customerID;
     }
 
     @Override
@@ -18,9 +18,9 @@ public class BankersAlgorithmThread extends Thread{
 
                 synchronized(bank){
                     
-                    bank.requestResources(customerNumber);
-                    bank.calculateCustomerNeed(customerNumber);
-                    bank.runProcess(customerNumber, i);            
+                    bank.requestResources(customerID);
+                    bank.calculateCustomerNeed(customerID);
+                    bank.runProcess(customerID, i);            
                 }
 
                 Thread.sleep(3000);
