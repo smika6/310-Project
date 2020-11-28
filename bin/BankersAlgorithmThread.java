@@ -36,8 +36,8 @@ public class BankersAlgorithmThread extends Thread{
         }
 
         synchronized(bank){
-            bank.releaseResources(customerID, release);
-            notifyAll();
+            //bank.releaseResources(customerID, release);
+            bank.notifyAll();
         }
     
     }
