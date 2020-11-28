@@ -20,7 +20,9 @@ public class BankersAlgorithmThread extends Thread{
                     
                     bank.requestResources(customerID);
                     bank.calculateCustomerNeed(customerID);
-                    bank.runProcess(customerID, i);            
+                    while ( !bank.runProcess(customerID, i) ){
+                        wait();
+                    }            
                 }
 
                 Thread.sleep(3000);
