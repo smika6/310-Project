@@ -258,6 +258,36 @@ public class Bank {
         displayOnCommandLine("\n");
     }
 
+    // Display final available and allocation matrix
+    public void displayFinalResource(){
+
+        displayOnCommandLine("\n[DISPLAY]: Final Available Vector: \n");
+
+        for (int a : this.available) {
+            displayOnCommandLine(a + " ");
+        }
+
+        displayOnCommandLine("\n");
+
+        displayOnCommandLine("\n[DISPLAY]: Final Allocation Matrix: \n");
+
+
+        // Release all allocation resource
+        for (int i = 0; i < this.allocation.length; i++) {
+            for (int j = 0; j < this.allocation[i].length; j++) {
+                allocation[i][j] = 0;
+            }
+        }
+
+        // Display allocation resource
+        for (int k = 0; k < this.allocation.length; k++) {
+            for (int l = 0; l < this.allocation[k].length; l++) {
+                displayOnCommandLine(this.allocation[k][l] + " ");
+            }
+            displayOnCommandLine("\n");
+        }
+    }
+
     private static void displayOnCommandLine(Object o) {
 
         System.out.print(o);
