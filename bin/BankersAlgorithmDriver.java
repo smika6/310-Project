@@ -130,7 +130,7 @@ public class BankersAlgorithmDriver {
     }
 
     //show the bank that its done
-    bank.displayAvailable();
+    bank.displayFinalResource();
     
   }
 
