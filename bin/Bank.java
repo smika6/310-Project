@@ -112,7 +112,6 @@ public class Bank {
      * @param customerID - The customer releasing resources
      */
     public void releaseResources(int customerID) {
-        // TODO Auto-generated method stub
 
         // Release allocation matrix
         for (int i = 0; i < this.numberOfResources; i ++){

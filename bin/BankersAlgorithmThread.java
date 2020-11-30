@@ -39,15 +39,6 @@ public class BankersAlgorithmThread extends Thread{
             } 
         }
 
-        /* ISSUE HERE.
-        
-            1. displaySafeSequence should only run once per cycles, but it not the case here.
-            2. displayFinalResource should only run at the end of the third cycles. Again it not the case here. 
-        
-        bank.displaySafeSequence();
-        bank.displayFinalResource();
-        */         
-
         synchronized(bank){
             bank.releaseResources(customerID);
             bank.notifyAll();
