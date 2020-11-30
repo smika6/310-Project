@@ -2,11 +2,11 @@ public class BankersAlgorithmThread extends Thread {
 
     Bank bank;
     int customerID;
-    int cycles;
 
     public BankersAlgorithmThread(Bank b, int customerID) {
         this.bank = b;
         this.customerID = customerID;
+      
     }
 
     @Override
@@ -23,7 +23,9 @@ public class BankersAlgorithmThread extends Thread {
                     while (!bank.runProcess(customerID, i)) {
                         wait();
                     }
+                    //done with work
 
+                    bank.safeStatus(customerID);
                 }
 
                 int sleep = (int) Math.round(Math.random() * (5 - 1) + 1);
@@ -34,8 +36,7 @@ public class BankersAlgorithmThread extends Thread {
 
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-
+            } 
         }
 
         synchronized (bank) {
@@ -44,5 +45,6 @@ public class BankersAlgorithmThread extends Thread {
         }
 
     }
-
 }
+
+

@@ -1,3 +1,10 @@
+/*
+* Programmer: Cheng Xiong and Jacob Hopkin
+* Course: CSCI 310
+* Description: Use Banker Algorithm, synchronized to prevent deadlock. Thread run for 3 cycles.
+*
+*/
+
 import java.util.Scanner;
 
 public class BankersAlgorithmDriver {
@@ -47,7 +54,7 @@ public class BankersAlgorithmDriver {
         System.exit(0);
       }
 
-    } else if (args.length == 0) { // user did not specify m and n through the command line
+    } else if (args.length == 0) { // User did not specify m and n through the command line
 
       Scanner commandlineScanner = new Scanner(System.in);
 
@@ -56,7 +63,7 @@ public class BankersAlgorithmDriver {
       String threadCountRequestString = String.format("[REQUEST]: Input the number of threads (%s-%s): ", lowerRange,
           upperRange);
 
-      // read in the count of resources, ensuring valid input
+      // Read in the count of resources, ensuring valid input
       while (countOfResources < lowerRange || countOfResources > upperRange) {
         displayOnCommandLine(resourceCountRequestString);
         countOfResources = commandlineScanner.nextInt();
@@ -64,13 +71,13 @@ public class BankersAlgorithmDriver {
 
       displayOnCommandLine("\n");
 
-      // read in the count of threads, ensuring valid input
+      // Read in the count of threads, ensuring valid input
       while (countOfThreads < lowerRange || countOfThreads > upperRange) {
         displayOnCommandLine(threadCountRequestString);
         countOfThreads = commandlineScanner.nextInt();
       }
 
-      // release resource
+      // Release resource
       commandlineScanner.close();
 
     } else { // not enough command line parameters provided
@@ -78,10 +85,10 @@ public class BankersAlgorithmDriver {
       System.exit(0);
     }
 
-    // we have valid inputs from here and can run the simulation
+    // We have valid inputs from here and can run the simulation
     runBankersAlgorithm(countOfResources, countOfThreads); // temp name cuz im getting hungry
 
-  }// end of main
+  }// End of main
 
   private static void displayOnCommandLine(Object o) {
 
@@ -91,12 +98,10 @@ public class BankersAlgorithmDriver {
 
   private static void runBankersAlgorithm(int resourceCount, int threadCount) {
 
-    // alert user of inputs provided.
+    // Alert user of inputs provided.
     String displayInputsString = String.format("%n[INFO]: Running Simulation with %s resource(s) and %s thread(s).%n",
         resourceCount, threadCount);
     displayOnCommandLine(displayInputsString);
-
-    // we can start the project
 
     Bank bank = new Bank(resourceCount, threadCount);
 
@@ -130,3 +135,4 @@ public class BankersAlgorithmDriver {
   }
 
 }// end of class
+

@@ -26,7 +26,7 @@ public class Bank {
         this.numberOfThreads = n;
 
         // Initialize allocation table
-        allocation = new int[numberOfThreads][numberOfResources];
+        allocation = new int[this.numberOfThreads][this.numberOfResources];
 
         // Initialize customer resource need table
         need = new int[numberOfThreads][numberOfResources];
@@ -112,9 +112,10 @@ public class Bank {
      * Release resource
      * 
      * @param customerID - The customer releasing resources
-     * @param release    - The resources being released
      */
     public void releaseResources(int customerID) {
+
+        // Release allocation matrix
         for (int i = 0; i < this.numberOfResources; i++) {
             currentAvailable[i] = currentAvailable[i] - allocation[customerID][i];
             allocation[customerID][i] = 0;
@@ -155,31 +156,25 @@ public class Bank {
      * @param customerID - The customer number
      * @param cycles     - Thread cycles
      */
-    public boolean safeStatus(int customerID, int cycles) {
+    public void safeStatus(int customerID) {
 
-        if (runProcess(customerID, cycles)) {
-
-            // Process is safe and enter the safe sequence
-            // ISSUE WITH CODE:
-            safeSequencedCustomers[safeIndex] = customerID;
-            safeIndex++;
-
-            displaySafeSequence();
-
-            return true;
-
+        if (safeIndex >= this.numberOfThreads) {
+            safeIndex = 0;
         }
-        return false;
+
+        // Process is safe and enter the safe sequence
+        safeSequencedCustomers[safeIndex] = customerID;
+        safeIndex++;
+
     }
 
     // Display safe sequence
     public void displaySafeSequence() {
 
-        displayOnCommandLine("[DISPLAY]: Bank - Safe Sequence\n");
+        displayOnCommandLine("\n[DISPLAY]: Bank - Safe Sequence\n");
 
-        for (int a : this.safeSequencedCustomers) {
-            displayOnCommandLine(a + " ");
-        }
+        for (int i = 0; i < this.numberOfThreads; i++)
+            displayOnCommandLine(safeSequencedCustomers[i] + " ");
 
         displayOnCommandLine("\n");
     }
@@ -262,6 +257,35 @@ public class Bank {
         }
 
         displayOnCommandLine("\n");
+    }
+
+    // Display final available and allocation matrix
+    public void displayFinalResource() {
+
+        displayOnCommandLine("\n[DISPLAY]: Final Available Vector: \n");
+
+        for (int a : this.available) {
+            displayOnCommandLine(a + " ");
+        }
+
+        displayOnCommandLine("\n");
+
+        displayOnCommandLine("\n[DISPLAY]: Final Allocation Matrix: \n");
+
+        // Release all allocation resource
+        for (int i = 0; i < this.allocation.length; i++) {
+            for (int j = 0; j < this.allocation[i].length; j++) {
+                allocation[i][j] = 0;
+            }
+        }
+
+        // Display allocation resource
+        for (int k = 0; k < this.allocation.length; k++) {
+            for (int l = 0; l < this.allocation[k].length; l++) {
+                displayOnCommandLine(this.allocation[k][l] + " ");
+            }
+            displayOnCommandLine("\n");
+        }
     }
 
     private static void displayOnCommandLine(Object o) {
