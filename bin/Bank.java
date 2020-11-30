@@ -30,7 +30,7 @@ public class Bank {
 
         // Initialize customer resource need table
         need = new int[numberOfThreads][numberOfResources];
-  
+
         // Initialize customer resource request array
         customerResource = new int[this.numberOfResources];
 
@@ -63,7 +63,6 @@ public class Bank {
             }
         }
 
-    
         getState();
 
     }
@@ -86,6 +85,7 @@ public class Bank {
 
     /**
      * Request resources
+     * 
      * @param customerID - The customer requesting resources
      * @return
      */
@@ -95,13 +95,14 @@ public class Bank {
             int customerNeed = (int) Math.round(Math.random() * (this.maximum[customerID][i] - minNeed) + minNeed);
             customerResource[i] = customerNeed;
 
-            // Track resource already allocation + new resource request from the same customer
+            // Track resource already allocation + new resource request from the same
+            // customer
             allocation[customerID][i] += customerResource[i];
         }
 
         // Diplay customer resource request
         displayCustomerRequest(customerID);
-        
+
         displayAllocation();
 
         return false;
@@ -109,66 +110,71 @@ public class Bank {
 
     /**
      * Release resource
+     * 
      * @param customerID - The customer releasing resources
-     * @param release        - The resources being released
+     * @param release    - The resources being released
      */
-    public void releaseResources(int customerID, int[] release) {
-        // TODO Auto-generated method stub
+    public void releaseResources(int customerID) {
+        for (int i = 0; i < this.numberOfResources; i++) {
+            currentAvailable[i] = currentAvailable[i] - allocation[customerID][i];
+            allocation[customerID][i] = 0;
+        }
 
     }
 
     /**
      * Process can run
+     * 
      * @param customerID - The customer number
-     * @param cycles - Thread cycles
+     * @param cycles     - Thread cycles
      */
     public boolean runProcess(int customerID, int cycles) {
 
         // Check and see if process is clear to run
-        for (int i = 0; i < this.numberOfResources; i++) 
+        for (int i = 0; i < this.numberOfResources; i++)
             if (need[customerID][i] > currentAvailable[i])
-               return false;
-           
-        
+                return false;
+
         // Run process
-        for (int j = 0; j < this.numberOfResources; j++) 
+        for (int j = 0; j < this.numberOfResources; j++)
             currentAvailable[j] = allocation[customerID][j] + currentAvailable[j];
 
-            displayOnCommandLine("Customer " + customerID + " Request " + cycles +" Is Granted\n");
-            
-            displayCurrentlyAvailable();
+        displayOnCommandLine("Customer " + customerID + " Request " + cycles + " Is Granted\n");
 
-            displayOnCommandLine("\n");
+        displayCurrentlyAvailable();
+
+        displayOnCommandLine("\n");
 
         return true;
 
     }
 
-      /**
+    /**
      * Safe Status
+     * 
      * @param customerID - The customer number
-     * @param cycles - Thread cycles
+     * @param cycles     - Thread cycles
      */
-    public boolean safeStatus(int customerID, int cycles){
+    public boolean safeStatus(int customerID, int cycles) {
 
-        if(runProcess(customerID, cycles)){
+        if (runProcess(customerID, cycles)) {
 
             // Process is safe and enter the safe sequence
-            // ISSUE WITH CODE: 
+            // ISSUE WITH CODE:
             safeSequencedCustomers[safeIndex] = customerID;
             safeIndex++;
-    
-            displaySafeSequence(customerID);
+
+            displaySafeSequence();
 
             return true;
 
         }
         return false;
     }
-    
+
     // Display safe sequence
-    public void displaySafeSequence(int customerID){
-        
+    public void displaySafeSequence() {
+
         displayOnCommandLine("[DISPLAY]: Bank - Safe Sequence\n");
 
         for (int a : this.safeSequencedCustomers) {
@@ -179,7 +185,7 @@ public class Bank {
     }
 
     // Display customer resource request
-    public void displayCustomerRequest(int customerID){
+    public void displayCustomerRequest(int customerID) {
 
         displayOnCommandLine("\n[DISPLAY]: Customer " + customerID + " Is Making A Request\n");
 
@@ -189,12 +195,11 @@ public class Bank {
 
         displayOnCommandLine("\n");
 
-
     }
 
     // Display customer allocation
     public void displayAllocation() {
-        
+
         displayOnCommandLine("\n[DISPLAY]: Bank - Allocation: \n");
 
         for (int j = 0; j < this.allocation.length; j++) {
@@ -209,7 +214,7 @@ public class Bank {
 
     // Display customer resource need
     public void displayNeed() {
-        
+
         displayOnCommandLine("\n[DISPLAY]: Bank - Need: \n");
 
         for (int j = 0; j < this.need.length; j++) {
@@ -238,8 +243,8 @@ public class Bank {
 
     // Display initial available resource
     public void displayAvailable() {
-       
-        displayOnCommandLine("\n[DISPLAY]: Bank - Initial Resources Available:\n");
+
+        displayOnCommandLine("\n[DISPLAY]: Bank - Resources Available:\n");
 
         for (int a : this.available) {
             displayOnCommandLine(a + " ");
@@ -249,7 +254,7 @@ public class Bank {
     }
 
     // Display current availalbe work resource
-    public void displayCurrentlyAvailable(){
+    public void displayCurrentlyAvailable() {
         displayOnCommandLine("\n[DISPLAY]: Current Available Work: \n");
 
         for (int c : this.currentAvailable) {

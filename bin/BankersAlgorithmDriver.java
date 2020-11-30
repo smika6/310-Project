@@ -102,13 +102,30 @@ public class BankersAlgorithmDriver {
 
     BankersAlgorithmThread[] customers = new BankersAlgorithmThread[threadCount];
 
-    for (int p = 0; p < customers.length; p++){
+    for (int p = 0; p < customers.length; p++) {
       customers[p] = new BankersAlgorithmThread(bank, p);
     }
 
-    for(BankersAlgorithmThread p : customers){
-     p.start();
-   }
+    for (BankersAlgorithmThread p : customers) {
+      p.start();
+    }
+
+    //do nothing and wait until all bank threads are done
+    boolean running = true;
+
+    while(running){
+      running = false;
+
+      for (BankersAlgorithmThread p : customers) {
+        if(p.isAlive()){
+          running = true;
+          break;
+        }
+      }
+    }
+
+    //show the bank that its done
+    bank.displayAvailable();
 
   }
 

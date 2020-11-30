@@ -1,10 +1,10 @@
-public class BankersAlgorithmThread extends Thread{
+public class BankersAlgorithmThread extends Thread {
 
     Bank bank;
     int customerID;
     int cycles;
 
-    public BankersAlgorithmThread(Bank b, int customerID){
+    public BankersAlgorithmThread(Bank b, int customerID) {
         this.bank = b;
         this.customerID = customerID;
     }
@@ -12,34 +12,37 @@ public class BankersAlgorithmThread extends Thread{
     @Override
     public void run() {
 
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
 
-            try{
+            try {
 
-                synchronized(bank){
-                    
+                synchronized (bank) {
+
                     bank.requestResources(customerID);
                     bank.calculateCustomerNeed(customerID);
-                    while ( !bank.runProcess(customerID, i) ){
+                    while (!bank.runProcess(customerID, i)) {
                         wait();
                     }
 
                 }
 
-                Thread.sleep(3000);
+                int sleep = (int) Math.round(Math.random() * (5 - 1) + 1);
 
-            }
-            catch(Exception e){
+                sleep = sleep * 1000;
+
+                Thread.sleep(sleep);
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
 
-        synchronized(bank){
-            //bank.releaseResources(customerID, release);
+        synchronized (bank) {
+            bank.releaseResources(customerID);
             bank.notifyAll();
         }
-    
+
     }
-    
+
 }
